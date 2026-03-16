@@ -357,6 +357,12 @@ public class RowTablePart {
             int pos = icebergSchema.columns().indexOf(loadDateXmlField);
             rowData.setField(pos, (int) dateXml.toEpochDay());
         }
+        // is_aligned_tran — всегда true по умолчанию
+        Types.NestedField isAlignedField = icebergSchema.findField("is_aligned_tran");
+        if (nonNull(isAlignedField)) {
+            int pos = icebergSchema.columns().indexOf(isAlignedField);
+            rowData.setField(pos, true);
+        }
         return rowData;
     }
 
