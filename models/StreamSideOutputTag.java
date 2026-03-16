@@ -44,6 +44,8 @@ public class StreamSideOutputTag {
         TAG_MAP.put("PST_BPLINEITEMDISCOUNT", new OutputTag<RowData>("pst_bplineitemdiscount"){});
         TAG_MAP.put("PST_BPLINEITEMDISCEXT", new OutputTag<RowData>("pst_bplineitemdiscountext"){});
         TAG_MAP.put("PST_BPTRANSACTDISCEXT", new OutputTag<RowData>("pst_bptransactdiscoext"){});
+        TAG_MAP.put("PST_BPTENDER", new OutputTag<RowData>("pst_bptender"){});
+        TAG_MAP.put("PST_BPTENDEREXTENSIONS", new OutputTag<RowData>("pst_bptenderextensions"){});
     }
     public static OutputTag<RowData> getTag(String segmentName) {
         return TAG_MAP.get(segmentName);
