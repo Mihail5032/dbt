@@ -104,7 +104,7 @@ public class DataStreamJob {
         tableMap.put("E1BPTRANSACTEXTENSIO", TableIdentifier.of(SCHEMA, "raw_bptransactextensio"));
 //        tableMap.put("E1BPTRANSACTEXTENSIO", TableIdentifier.of(SCHEMA, "bptransactextensio_pre"));
         tableMap.put("E1BPLINEITEMVOID", TableIdentifier.of(SCHEMA, "raw_bplineitemvoid"));
-        tableMap.put("E1BPPOSTVOIDDETAILS", TableIdentifier.of(SCHEMA, "raw_bppostvoiddetails"));
+        // tableMap.put("E1BPPOSTVOIDDETAILS", TableIdentifier.of(SCHEMA, "raw_bppostvoiddetails"));
 
         for (Map.Entry<String, TableIdentifier> entry : tableMap.entrySet()) {
             String segment = entry.getKey();
@@ -128,6 +128,8 @@ public class DataStreamJob {
         pstTableMap.put("PST_BPLINEITEMDISCOUNT", TableIdentifier.of("test_staging", "bplineitemdiscount_new_pst_2"));
         pstTableMap.put("PST_BPLINEITEMDISCEXT", TableIdentifier.of("test_staging", "bplineitemdiscountext_new_pst_2"));
         pstTableMap.put("PST_BPTRANSACTDISCEXT", TableIdentifier.of("test_staging", "bptransactdiscoext_new_pst_2"));
+        pstTableMap.put("PST_BPTENDER", TableIdentifier.of("test_staging", "bptender_new_pst_2"));
+        pstTableMap.put("PST_BPTENDEREXTENSIONS", TableIdentifier.of("test_staging", "bptenderextensions_new_pst_2"));
 
 
         Map<String, Schema> pstSchemas = new HashMap<>();
@@ -142,22 +144,22 @@ public class DataStreamJob {
                 .setParallelism(10)
                 .uid(UID_PROCESS);
 
-        // RAW sinks отключены — старый парсер уже пишет в raw таблицы
-//        for (Map.Entry<String, TableIdentifier> entry : tableMap.entrySet()) {
-//            String segment = entry.getKey();
-//            OutputTag<RowData> tag = StreamSideOutputTag.getTag(segment);
-//            TableLoader loader = tableLoaders.get(segment);
-//
-//            DataStream<RowData> sideStream = rowData.getSideOutput(tag);
-//
-//            FlinkSink.forRowData(sideStream)
-//                    .tableLoader(loader)
-//                    .writeParallelism(1)
-//                    .upsert(false)
-//                    .uidPrefix("sink-" + segment.toLowerCase())
-//                    .set("write.target-file-size-bytes", "268435456")
-//                    .append();
-//        }
+        // RAW sinks
+        for (Map.Entry<String, TableIdentifier> entry : tableMap.entrySet()) {
+            String segment = entry.getKey();
+            OutputTag<RowData> tag = StreamSideOutputTag.getTag(segment);
+            TableLoader loader = tableLoaders.get(segment);
+
+            DataStream<RowData> sideStream = rowData.getSideOutput(tag);
+
+            FlinkSink.forRowData(sideStream)
+                    .tableLoader(loader)
+                    .writeParallelism(1)
+                    .upsert(false)
+                    .uidPrefix("sink-" + segment.toLowerCase())
+                    .set("write.target-file-size-bytes", "268435456")
+                    .append();
+        }
 
         // PST sinks
         Map<String, TableLoader> pstSinkLoaders = new HashMap<>();
@@ -172,9 +174,8 @@ public class DataStreamJob {
                     .tableLoader(loader)
                     .writeParallelism(1)
                     .upsert(false)
-                    //.uidPrefix("sink-" + segment.toLowerCase()) нет поля segment
+                    .uidPrefix("sink-" + pstKey.toLowerCase())
                     .set("write.target-file-size-bytes", "268435456")
-                    .uidPrefix(pstKey)
                     .append();
         }
 
