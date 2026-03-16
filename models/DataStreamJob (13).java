@@ -25,7 +25,7 @@ import java.util.Map;
 
 public class DataStreamJob {
     public static final String CATALOG = "core_flow_ice";
-    public static final String SCHEMA = "core_flow_ice";
+    public static final String SCHEMA = "core_flow_ing_raw";
     private static final String UID_SOURCE = "kafka-source";
     private static final String UID_PROCESS = "raw-data-process";
     private final Map<String, TableIdentifier> tableMap = new HashMap<>();
@@ -44,28 +44,29 @@ public class DataStreamJob {
 
         PropertiesHolder config = PropertiesHolder.getInstance();
 
-        // === HARDCODE S3 CONFIG FOR TEST ===
+        // === HARDCODE S3 CONFIG FOR DEV DMP ===
         org.apache.hadoop.conf.Configuration hadoopConf = new org.apache.hadoop.conf.Configuration();
-        hadoopConf.set("fs.s3a.endpoint", config.getS3Endpoint());
-        hadoopConf.set("fs.s3a.path.style.access", config.getPathStyleAccess());
-        hadoopConf.set("fs.s3a.access.key", config.getAccessKey());
-        hadoopConf.set("fs.s3a.secret.key", config.getSecretKey());
-        hadoopConf.set("fs.s3a.connection.ssl.enabled", config.getConnectionsSslEnabled());
-        hadoopConf.set("fs.s3a.impl", config.getS3Impl());
-        hadoopConf.set("fs.s3a.aws.credentials.provider", config.getAwsCredentialsProvider());
-        hadoopConf.set("fs.s3a.region", config.getClientRegion());
-        hadoopConf.set("hive.metastore.uris", config.getHiveMetastoreUris());
-        hadoopConf.setBoolean("fs.s3a.impl.disable.cache", Boolean.parseBoolean(config.getImplDisCache()));
+        hadoopConf.set("fs.s3a.endpoint", "https://s3dh-dev.dmp.x5.ru:9000");
+        hadoopConf.set("fs.s3a.path.style.access", "true");
+        hadoopConf.set("fs.s3a.access.key", "e293TBTfElDGPNuq2mpe");
+        hadoopConf.set("fs.s3a.secret.key", "TTQTi4KeTDeX12lKQjoOruYO7evCcA6xBLuJqWBE");
+        hadoopConf.set("fs.s3a.connection.ssl.enabled", "false");
+        hadoopConf.set("fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem");
+        hadoopConf.set("fs.s3a.aws.credentials.provider", "org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider");
+        hadoopConf.set("fs.s3a.region", "endpoint");
+        hadoopConf.set("hive.metastore.uris", "thrift://hive-metastore-dev.hive-metastore-dev.svc.cluster.local:9083");
+        hadoopConf.setBoolean("fs.s3a.impl.disable.cache", true);
 
         // Catalog properties — S3FileIO вместо HadoopFileIO (обходит Flink S3 plugin)
         Map<String, String> catalogProps = new HashMap<>();
-        catalogProps.put("warehouse", config.getWarehouse());
-        catalogProps.put("io-impl", config.getIoImpl());
-        catalogProps.put("s3.endpoint", config.getS3Endpoint());
-        catalogProps.put("s3.path-style-access", config.getPathStyleAccess());
-        catalogProps.put("s3.access-key-id", config.getAccessKey());
-        catalogProps.put("s3.secret-access-key", config.getSecretKey());
-        catalogProps.put("client.region", config.getClientRegion());
+        catalogProps.put("warehouse", "s3a://core-flow-cd-datatransfer");
+        catalogProps.put("io-impl", "org.apache.iceberg.aws.s3.S3FileIO");
+        catalogProps.put("s3.endpoint", "https://s3dh-dev.dmp.x5.ru:9000");
+        catalogProps.put("s3.path-style-access", "true");
+        catalogProps.put("s3.access-key-id", "e293TBTfElDGPNuq2mpe");
+        catalogProps.put("s3.secret-access-key", "TTQTi4KeTDeX12lKQjoOruYO7evCcA6xBLuJqWBE");
+        catalogProps.put("client.region", "endpoint");
+        catalogProps.put("connection.ssl.enabled", "false");
 
         CatalogLoader catalogLoader = CatalogLoader.hive(CATALOG, hadoopConf, catalogProps);
         // === END HARDCODE ===
