@@ -248,10 +248,18 @@ public class RawDataProcessFunction extends ProcessFunction<String, RowData> {
                             context.output(StreamSideOutputTag.getTag("PST_BPTRANSACTDISCEXT"), pstRowData);
                         }
                     }
+
+
                 } catch (Exception e) {
                     log.error("Error processing segment " + baseTransactionKey.getSegmentName()
                             + " for txn " + baseTransactionKey.getTransactionKey(), e);
                 }
+            }
+            try {
+                processTender(context, corrBaseTransactionKeyList, timestampDataXml, dateXml);
+                processTenderExt(context, corrBaseTransactionKeyList, timestampDataXml, dateXml);
+            } catch (Exception e) {
+                log.error("Error processing tender pst ", e);
             }
             SourceDocument sourceDoc = doc.getIdoc().getPostrCreateMultip().getSourceDocument();
             String segmentName = sourceDoc.getSegmentName();
@@ -260,6 +268,28 @@ public class RawDataProcessFunction extends ProcessFunction<String, RowData> {
         } catch (Exception e) {
             log.warn("Error message: " + kafkaValue);
             log.error("Error on message parsing: ", e);
+        }
+    }
+
+    private void processTenderExt(Context context, List<BaseTransactionKey> corrBaseTransactionKeyList, TimestampData timestampDataXml, LocalDate dateXml) {
+        TenderExtPstProcessor tenderPstProcessor = new TenderExtPstProcessor(corrBaseTransactionKeyList);
+        List<TenderExtension> tenders = tenderPstProcessor.prepareTenderExtensionPst();
+        String segmentName = "E1BPTENDEREXTENSIONS";
+        for (TenderExtension tender : tenders) {
+            Schema icebergSchema = getSchemaForSegment(segmentName);
+            RowData rowData = tender.toRowData(icebergSchema, timestampDataXml, dateXml);
+            routeToSegment(context, rowData, segmentName);
+        }
+    }
+
+    private void processTender(Context context, List<BaseTransactionKey> corrBaseTransactionKeyList, TimestampData timestampDataXml, LocalDate dateXml) {
+        TenderPstProcessor tenderPstProcessor = new TenderPstProcessor(corrBaseTransactionKeyList);
+        List<Tender> tenders = tenderPstProcessor.prepareTenderPst();
+        String segmentName = "E1BPTENDER";
+        for (Tender tender : tenders) {
+            Schema icebergSchema = getSchemaForSegment(segmentName);
+            RowData rowData = tender.toRowData(icebergSchema, timestampDataXml, dateXml);
+            routeToSegment(context, rowData, segmentName);
         }
     }
 
