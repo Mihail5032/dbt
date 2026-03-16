@@ -130,6 +130,12 @@ public class RawDataProcessFunction extends ProcessFunction<String, RowData> {
             }
             Set<String> autoMDSet = getAutoMDSet(corrBaseTransactionKeyList);   //получение автоуценок для retaillineitem
             Set<String> emptyEanSet = getEmptyEanSet(retailLineItems);
+            // PST Tender: определяем наличие CERT_PARTY=RU02 среди TenderExtension
+            boolean isCertParty = corrBaseTransactionKeyList.stream()
+                    .filter(x -> x instanceof TenderExtension)
+                    .map(x -> (TenderExtension) x)
+                    .anyMatch(x -> x.getFieldName() != null && x.getFieldName().contains("CERT_PARTY")
+                            && x.getFieldValue() != null && x.getFieldValue().contains("RU02"));
             // PST FinancialMovemen: собираем NOTE fieldvalue из TransactionExtension
             Map<String, String> noteFieldValueMap = new HashMap<>();
             Schema pstFinancialMovemenSchema = pstSchemas.get("PST_BPFINANCIALMOVEMEN");
@@ -249,17 +255,36 @@ public class RawDataProcessFunction extends ProcessFunction<String, RowData> {
                         }
                     }
 
+                    // PST: для Tender объектов формируем PST RowData из raw (3108→3123 при CERT_PARTY=RU02)
+                    if (baseTransactionKey instanceof Tender) {
+                        Schema pstSchema = pstSchemas.get("PST_BPTENDER");
+                        if (pstSchema != null) {
+                            Tender tender = (Tender) baseTransactionKey;
+                            RowData pstRowData = tender.toRowDataPst(rowData, icebergSchema, pstSchema, isCertParty);
+                            context.output(StreamSideOutputTag.getTag("PST_BPTENDER"), pstRowData);
+                        }
+                    }
+
+                    // PST: для TenderExtension объектов формируем PST RowData из raw (CERT_PRICE → часть после ".")
+                    if (baseTransactionKey instanceof TenderExtension) {
+                        Schema pstSchema = pstSchemas.get("PST_BPTENDEREXTENSIONS");
+                        if (pstSchema != null) {
+                            TenderExtension tenderExt = (TenderExtension) baseTransactionKey;
+                            RowData pstRowData = tenderExt.toRowDataPst(rowData, icebergSchema, pstSchema);
+                            context.output(StreamSideOutputTag.getTag("PST_BPTENDEREXTENSIONS"), pstRowData);
+                        }
+                    }
 
                 } catch (Exception e) {
                     log.error("Error processing segment " + baseTransactionKey.getSegmentName()
                             + " for txn " + baseTransactionKey.getTransactionKey(), e);
                 }
             }
+            // Синтетические тендеры (коррекция разницы сумм + тендеры для txnType=1014) → PST
             try {
-                processTender(context, corrBaseTransactionKeyList, timestampDataXml, dateXml);
-                processTenderExt(context, corrBaseTransactionKeyList, timestampDataXml, dateXml);
+                processTenderSynthetic(context, corrBaseTransactionKeyList, timestampDataXml, dateXml);
             } catch (Exception e) {
-                log.error("Error processing tender pst ", e);
+                log.error("Error processing synthetic tender pst ", e);
             }
             SourceDocument sourceDoc = doc.getIdoc().getPostrCreateMultip().getSourceDocument();
             String segmentName = sourceDoc.getSegmentName();
@@ -271,25 +296,31 @@ public class RawDataProcessFunction extends ProcessFunction<String, RowData> {
         }
     }
 
-    private void processTenderExt(Context context, List<BaseTransactionKey> corrBaseTransactionKeyList, TimestampData timestampDataXml, LocalDate dateXml) {
-        TenderExtPstProcessor tenderPstProcessor = new TenderExtPstProcessor(corrBaseTransactionKeyList);
-        List<TenderExtension> tenders = tenderPstProcessor.prepareTenderExtensionPst();
-        String segmentName = "E1BPTENDEREXTENSIONS";
-        for (TenderExtension tender : tenders) {
-            Schema icebergSchema = getSchemaForSegment(segmentName);
-            RowData rowData = tender.toRowData(icebergSchema, timestampDataXml, dateXml);
-            routeToSegment(context, rowData, segmentName);
-        }
-    }
+    /**
+     * Создаёт синтетические тендеры (коррекция разницы сумм, тендеры для txnType=1014)
+     * и записывает их в PST-таблицу PST_BPTENDER.
+     * Бизнес-логика из TenderPstProcessor.prepareFirstPart/prepareSecondPart.
+     */
+    private void processTenderSynthetic(Context context, List<BaseTransactionKey> corrBaseTransactionKeyList,
+                                         TimestampData timestampDataXml, LocalDate dateXml) {
+        Schema pstSchema = pstSchemas.get("PST_BPTENDER");
+        if (pstSchema == null) return;
 
-    private void processTender(Context context, List<BaseTransactionKey> corrBaseTransactionKeyList, TimestampData timestampDataXml, LocalDate dateXml) {
         TenderPstProcessor tenderPstProcessor = new TenderPstProcessor(corrBaseTransactionKeyList);
-        List<Tender> tenders = tenderPstProcessor.prepareTenderPst();
-        String segmentName = "E1BPTENDER";
-        for (Tender tender : tenders) {
-            Schema icebergSchema = getSchemaForSegment(segmentName);
-            RowData rowData = tender.toRowData(icebergSchema, timestampDataXml, dateXml);
-            routeToSegment(context, rowData, segmentName);
+        List<Tender> syntheticTenders = tenderPstProcessor.prepareTenderPst();
+
+        // prepareThirdPart мутирует существующие тендеры (3108→3123) — эта логика
+        // теперь в Tender.toRowDataPst(), поэтому фильтруем только синтетические тендеры
+        // (те, у которых tenderTypeCode = "3101" — созданные prepareFirstPart/prepareSecondPart)
+        for (Tender tender : syntheticTenders) {
+            if ("3101".equals(tender.getTenderTypeCode())) {
+                Schema rawSchema = getSchemaForSegment("E1BPTENDER");
+                if (rawSchema != null) {
+                    RowData rawRowData = tender.toRowData(rawSchema, timestampDataXml, dateXml);
+                    RowData pstRowData = tender.toRowDataPst(rawRowData, rawSchema, pstSchema, false);
+                    context.output(StreamSideOutputTag.getTag("PST_BPTENDER"), pstRowData);
+                }
+            }
         }
     }
 
