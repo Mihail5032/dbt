@@ -243,11 +243,8 @@ public class RowTablePart {
     private String segment_name;
     private String dataflow_ddtm;
     private String load_ts;
-<<<<<<< HEAD
     private String is_corr_receipt;
-=======
     private String is_aligned_tran;
->>>>>>> origin/Feature/new_parser_fix_canceled_receipts
 
     public static RowTablePart.RowTablePartBuilder fromBase(RowTablePart base) {
         return RowTablePart.builder()
@@ -310,18 +307,10 @@ public class RowTablePart {
                         LocalDateTime dateTime = parseToFormattedDate(value);
                         TimestampData td = dateTime == null ? null : TimestampData.fromLocalDateTime(dateTime);
                         rowData.setField(pos, td);
-<<<<<<< HEAD
                     } else if (typeID == Type.TypeID.BOOLEAN) {
                         Boolean boolValue = Boolean.parseBoolean(value);
                         rowData.setField(pos, boolValue);
-                    }
-                    else {
-=======
-                    }  else if (typeID == Type.TypeID.BOOLEAN) {
-                        Boolean boolValue = Boolean.parseBoolean(value);
-                        rowData.setField(pos, boolValue);
-                    }else {
->>>>>>> origin/Feature/new_parser_fix_canceled_receipts
+                    } else {
                         if (key.contains("date") || key.contains("timestamp")) {
                             StringData stringDateTime = parseToFormattedDateString(value);
                             rowData.setField(pos, stringDateTime);
@@ -605,11 +594,8 @@ public class RowTablePart {
         nameValue.put("workstationid", workstationid);
         nameValue.put("segment_name", segment_name);
         nameValue.put("dataflow_ddtm", dataflow_ddtm);
-<<<<<<< HEAD
         nameValue.put("is_corr_receipt", is_corr_receipt);
-=======
         nameValue.put("is_aligned_tran", is_aligned_tran);
->>>>>>> origin/Feature/new_parser_fix_canceled_receipts
         return nameValue;
     }
 
