@@ -37,17 +37,10 @@ public class LineItemDiscExt extends BaseTransactionKey {;
         String fieldGroupStr = StringUtils.isBlank(fieldGroup) ? fieldGroup : fieldGroup.substring(0, Math.min(fieldGroup.length(), 5));
         String fieldNameStr = StringUtils.isBlank(fieldName) ? fieldName : fieldName.substring(0, Math.min(fieldName.length(), 10));
         return RowTablePart.fromBase(basePart).segment_name(getSegmentName()).retailsequencenumber(retailSequenceNumber)
-<<<<<<< HEAD
                 .discountsequencenumber(discountSequenceNumber).fieldgroup(fieldGroupStr)
-                .fieldname(fieldNameStr).fieldvalue(fieldValue).build().toRowData(icebergSchema, timestampDataXml, dateXml);
-=======
-                .discountsequencenumber(discountSequenceNumber)
-                .fieldgroup(fieldGroup)
-                .fieldname(fieldName)
-                .fieldvalue(fieldValue)
+                .fieldname(fieldNameStr).fieldvalue(fieldValue)
                 .is_aligned_tran(String.valueOf(super.getIs_aligned_tran()))
                 .build().toRowData(icebergSchema, timestampDataXml, dateXml);
->>>>>>> origin/Feature/new_parser_fix_canceled_receipts
     }
     @Override
     public String getSegmentName(){return "E1BPLINEITEMDISCEXT";}
