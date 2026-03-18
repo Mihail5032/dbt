@@ -1,3 +1,62 @@
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  8.239 s
+[INFO] Finished at: 2026-03-18T18:03:40+03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project
+ xml-parser-correction: Compilation failure: Compilation failure:
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/TransactDiscExt.java:[40,3] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/TransactDiscExt.java:[40,5] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/TransactDiscExt.java:[41,40] > expected
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/TransactDiscExt.java:[41,41] not a statement
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/TransactDiscExt.java:[41,63] ';' expected
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/TransactDiscExt.java:[43,1] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/TransactDiscExt.java:[43,3] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/TransactDiscExt.java:[43,5] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/TransactDiscExt.java:[43,7] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/TransactDiscExt.java:[44,17] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/TransactDiscExt.java:[50,1] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/TransactDiscExt.java:[50,4] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/TransactDiscExt.java:[50,7] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/TransactDiscExt.java:[50,56] ';' expected
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[246,1] illegal start of type
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[246,13] > expected
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[247,5] illegal start of type
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[248,1] illegal start of type
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[250,1] illegal start of type
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[250,15] <identifier> expected
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[250,23] <identifier> expected
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[250,56] <identifier> expected
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[313,1] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[313,3] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[313,5] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[314,21] > expected
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[319,1] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[319,3] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[319,5] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[319,7] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[320,21] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[324,1] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[324,4] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[324,7] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[324,56] ';' expected
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[320,24] 'else' without 'if'
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[608,1] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[608,3] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[608,5] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[609,9] > expected
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[610,1] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[610,3] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[610,5] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[610,7] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[612,1] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[612,4] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[612,7] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RowTablePart.java:[612,56] ';' expected
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RetailLineItem.java:[92,3] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RetailLineItem.java:[92,5] illegal start of expression
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RetailLineItem.java:[93,23] > expected
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RetailLineItem.java:[93,24] not a statement
 [ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RetailLineItem.java:[93,29] ';' expected
 [ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RetailLineItem.java:[94,1] illegal start of expression
 [ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RetailLineItem.java:[94,3] illegal start of expression
@@ -8,10 +67,6 @@
 [ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RetailLineItem.java:[98,4] illegal start of expression
 [ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RetailLineItem.java:[98,7] illegal start of expression
 [ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/RetailLineItem.java:[98,56] ';' expected
-[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/LineItemDiscExt.java:[46,1] illegal start of expression
-[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/LineItemDiscExt.java:[46,4] illegal start of expression
-[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/LineItemDiscExt.java:[46,7] illegal start of expression
-[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/model/LineItemDiscExt.java:[46,56] ';' expected
 [ERROR] -> [Help 1]
 [ERROR]
 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
@@ -19,6 +74,3 @@
 [ERROR]
 [ERROR] For more information about the errors and possible solutions, please read the following articles:
 [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
-<<<<<<<
-
-
