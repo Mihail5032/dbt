@@ -89,13 +89,10 @@ public class RetailLineItem extends BaseTransactionKey {
                 .itemidentrymethodcode(itemIdenTryMethodCode).actualunitprice(actualUnitPrice).nonexistentarticleid(nonExistentArticleId)
                 .regularsalesamount(regularSalesAmount).units(units).scantime(scanTime)
                 .matnr_padded(matnrPadded).umrez_val(umrezVal)
-<<<<<<< HEAD
-                .lfnum(lfnum).ean11(ean11).is_corr_receipt(String.valueOf(false)).build().toRowData(icebergSchema, timestampDataXml, dateXml);
-=======
                 .lfnum(lfnum).ean11(ean11)
+                .is_corr_receipt(String.valueOf(false))
                 .is_aligned_tran(String.valueOf(super.getIs_aligned_tran()))
                 .build().toRowData(icebergSchema, timestampDataXml, dateXml);
->>>>>>> origin/Feature/new_parser_fix_canceled_receipts
     }
 
     @Override
