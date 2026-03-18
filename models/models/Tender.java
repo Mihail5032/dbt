@@ -71,6 +71,7 @@ public class Tender extends BaseTransactionKey {
 
         // ---- Копируем поля напрямую из raw RowData (типы совпадают) ----
         copyField(rawRowData, rawSchema, pstRowData, pstSchema, "rtl_txn_rk");
+        copyField(rawRowData, rawSchema, pstRowData, pstSchema, "rtl_txn_tender_rk");
         copyField(rawRowData, rawSchema, pstRowData, pstSchema, "retailstoreid");
         copyField(rawRowData, rawSchema, pstRowData, pstSchema, "transactionsequencenumber");
         copyField(rawRowData, rawSchema, pstRowData, pstSchema, "transactiontypecode");
@@ -101,7 +102,8 @@ public class Tender extends BaseTransactionKey {
             }
         }
 
-        // ---- tendertypecode: PST-логика 3108 → 3123 при наличии CERT_PARTY=RU02 ----
+        // ---- tendertypecode: копируем из raw, затем PST-логика 3108 → 3123 ----
+        copyField(rawRowData, rawSchema, pstRowData, pstSchema, "tendertypecode");
         Object rawTenderTypeCode = extractField(rawRowData, rawSchema, "tendertypecode");
         String ttc = extractString(rawTenderTypeCode);
         if (isCertParty && "3108".equals(ttc)) {
