@@ -64,6 +64,7 @@ public class TenderExtension extends BaseTransactionKey {
 
         // ---- Копируем поля напрямую из raw RowData (типы совпадают) ----
         copyField(rawRowData, rawSchema, pstRowData, pstSchema, "rtl_txn_rk");
+        copyField(rawRowData, rawSchema, pstRowData, pstSchema, "rtl_txn_tender_rk");
         copyField(rawRowData, rawSchema, pstRowData, pstSchema, "retailstoreid");
         copyField(rawRowData, rawSchema, pstRowData, pstSchema, "transactionsequencenumber");
         copyField(rawRowData, rawSchema, pstRowData, pstSchema, "transactiontypecode");
