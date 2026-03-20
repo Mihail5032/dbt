@@ -1,34 +1,10 @@
-org.apache.flink.runtime.rest.handler.RestHandlerException: Could not execute application.
-	at org.apache.flink.runtime.webmonitor.handlers.JarRunHandler.lambda$handleRequest$1(JarRunHandler.java:114)
-	at java.base/java.util.concurrent.CompletableFuture.uniHandle(Unknown Source)
-	at java.base/java.util.concurrent.CompletableFuture$UniHandle.tryFire(Unknown Source)
-	at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
-	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(Unknown Source)
-	at java.base/java.lang.Thread.run(Unknown Source)
-Caused by: java.util.concurrent.CompletionException: org.apache.flink.util.FlinkRuntimeException: Could not execute application.
-	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(Unknown Source)
-	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(Unknown Source)
-	... 2 more
-Caused by: org.apache.flink.util.FlinkRuntimeException: Could not execute application.
-	at org.apache.flink.client.deployment.application.DetachedApplicationRunner.tryExecuteJobs(DetachedApplicationRunner.java:88)
-	at org.apache.flink.client.deployment.application.DetachedApplicationRunner.run(DetachedApplicationRunner.java:70)
-	at org.apache.flink.runtime.webmonitor.handlers.JarRunHandler.lambda$handleRequest$0(JarRunHandler.java:108)
-	... 2 more
-Caused by: org.apache.flink.client.program.ProgramInvocationException: The main method caused an error: The value of property fs.s3a.path.style.access must not be null
-	at org.apache.flink.client.program.PackagedProgram.callMainMethod(PackagedProgram.java:360)
-	at org.apache.flink.client.program.PackagedProgram.invokeInteractiveModeForExecution(PackagedProgram.java:223)
-	at org.apache.flink.client.ClientUtils.executeProgram(ClientUtils.java:105)
-	at org.apache.flink.client.deployment.application.DetachedApplicationRunner.tryExecuteJobs(DetachedApplicationRunner.java:84)
-	... 4 more
-Caused by: java.lang.IllegalArgumentException: The value of property fs.s3a.path.style.access must not be null
-	at org.apache.hadoop.thirdparty.com.google.common.base.Preconditions.checkArgument(Preconditions.java:219)
-	at org.apache.hadoop.conf.Configuration.set(Configuration.java:1403)
-	at org.apache.hadoop.conf.Configuration.set(Configuration.java:1384)
-	at ru.x5.DataStreamJob.run(DataStreamJob.java:50)
-	at ru.x5.DataStreamJob.main(DataStreamJob.java:36)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
-	at org.apache.flink.client.program.PackagedProgram.callMainMethod(PackagedProgram.java:343)
-	... 7 more
+# --- Ключи для PropertiesHolder ---
+s3.path.style.access=true
+s3.access.key.id=
+s3.secret.access.key=
+connection.ssl.enabled=true
+s3.impl=org.apache.hadoop.fs.s3a.S3AFileSystem
+io.impl=org.apache.iceberg.aws.s3.S3FileIO
+s3.aws.credentials.provider=org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider
+client.region=endpoint
+impl.disable.cache=true
