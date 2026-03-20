@@ -1,1 +1,4 @@
 location = 's3a://datatransfer/core_flow_ing_raw'
+
+SELECT * FROM system.metadata.catalog_properties WHERE catalog_name = 'lev_ice';
+
