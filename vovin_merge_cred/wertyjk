@@ -10,3 +10,5 @@ io.impl=org.apache.iceberg.aws.s3.S3FileIO
 s3.aws.credentials.provider=org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider
 client.region=endpoint
 impl.disable.cache=true
+
+https://flink-operator-x5potok-test-salt-1.x5.ru/#/overview
