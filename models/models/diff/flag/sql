@@ -1,3 +1,7 @@
+
+CREATE SCHEMA lev_ice.core_flow_ing_raw
+WITH (location = 's3a://datatransfer/core_flow_ing_raw');
+
 -- 1. raw_bpfinacialmovement
 CREATE TABLE lev_ice.core_flow_ing_raw.raw_bpfinacialmovement
 WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
