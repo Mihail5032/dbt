@@ -1,4 +1,5 @@
 location = 's3a://datatransfer/core_flow_ing_raw'
 
 SELECT * FROM system.metadata.catalog_properties WHERE catalog_name = 'lev_ice';
+SQL Error [65536]: Query failed (#20260320_085004_01223_njazu): ConnectorMetadata getTableHandle() is not implemented
 
