@@ -1,51 +1,62 @@
-2026-03-20 16:06:38
-org.apache.flink.util.FlinkException: Global failure triggered by OperatorCoordinator for 'Source: Kafka Source -> Process' (operator 61252f73469d3ffba207c548d29a0267).
-	at org.apache.flink.runtime.operators.coordination.OperatorCoordinatorHolder$LazyInitializedCoordinatorContext.failJob(OperatorCoordinatorHolder.java:661)
-	at org.apache.flink.runtime.operators.coordination.RecreateOnResetOperatorCoordinator$QuiesceableContext.failJob(RecreateOnResetOperatorCoordinator.java:267)
-	at org.apache.flink.runtime.source.coordinator.SourceCoordinatorContext.failJob(SourceCoordinatorContext.java:437)
-	at org.apache.flink.runtime.source.coordinator.SourceCoordinator.lambda$runInEventLoop$10(SourceCoordinator.java:566)
-	at org.apache.flink.util.ThrowableCatchingRunnable.run(ThrowableCatchingRunnable.java:40)
-	at org.apache.flink.util.MdcUtils.lambda$wrapRunnable$1(MdcUtils.java:70)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
-	at java.base/java.util.concurrent.FutureTask.run(Unknown Source)
-	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(Unknown Source)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-	at java.base/java.lang.Thread.run(Unknown Source)
-Caused by: org.apache.kafka.common.KafkaException: Failed to create new KafkaAdminClient
-	at org.apache.kafka.clients.admin.KafkaAdminClient.createInternal(KafkaAdminClient.java:561)
-	at org.apache.kafka.clients.admin.KafkaAdminClient.createInternal(KafkaAdminClient.java:512)
-	at org.apache.kafka.clients.admin.Admin.create(Admin.java:137)
-	at org.apache.kafka.clients.admin.AdminClient.create(AdminClient.java:39)
-	at org.apache.flink.connector.kafka.source.enumerator.KafkaSourceEnumerator.getKafkaAdminClient(KafkaSourceEnumerator.java:441)
-	at org.apache.flink.connector.kafka.source.enumerator.KafkaSourceEnumerator.start(KafkaSourceEnumerator.java:164)
-	at org.apache.flink.runtime.source.coordinator.SourceCoordinator.lambda$start$1(SourceCoordinator.java:260)
-	at org.apache.flink.runtime.source.coordinator.SourceCoordinator.lambda$runInEventLoop$10(SourceCoordinator.java:552)
-	... 8 more
-Caused by: org.apache.kafka.common.KafkaException: Failed to create new NetworkClient
-	at org.apache.kafka.clients.ClientUtils.createNetworkClient(ClientUtils.java:255)
-	at org.apache.kafka.clients.ClientUtils.createNetworkClient(ClientUtils.java:190)
-	at org.apache.kafka.clients.admin.KafkaAdminClient.createInternal(KafkaAdminClient.java:545)
-	... 15 more
-Caused by: org.apache.kafka.common.KafkaException: javax.security.auth.login.LoginException: Could not login: the client is being asked for a password, but the Kafka client code does not currently support obtaining a password from the user. not available to garner  authentication information from the user
-	at org.apache.kafka.common.network.SaslChannelBuilder.configure(SaslChannelBuilder.java:187)
-	at org.apache.kafka.common.network.ChannelBuilders.create(ChannelBuilders.java:193)
-	at org.apache.kafka.common.network.ChannelBuilders.clientChannelBuilder(ChannelBuilders.java:82)
-	at org.apache.kafka.clients.ClientUtils.createChannelBuilder(ClientUtils.java:120)
-	at org.apache.kafka.clients.ClientUtils.createNetworkClient(ClientUtils.java:224)
-	... 17 more
-Caused by: javax.security.auth.login.LoginException: Could not login: the client is being asked for a password, but the Kafka client code does not currently support obtaining a password from the user. not available to garner  authentication information from the user
-	at jdk.security.auth/com.sun.security.auth.module.Krb5LoginModule.promptForPass(Unknown Source)
-	at jdk.security.auth/com.sun.security.auth.module.Krb5LoginModule.attemptAuthentication(Unknown Source)
-	at jdk.security.auth/com.sun.security.auth.module.Krb5LoginModule.login(Unknown Source)
-	at java.base/javax.security.auth.login.LoginContext.invoke(Unknown Source)
-	at java.base/javax.security.auth.login.LoginContext$4.run(Unknown Source)
-	at java.base/javax.security.auth.login.LoginContext$4.run(Unknown Source)
-	at java.base/java.security.AccessController.doPrivileged(Unknown Source)
-	at java.base/javax.security.auth.login.LoginContext.invokePriv(Unknown Source)
-	at java.base/javax.security.auth.login.LoginContext.login(Unknown Source)
-	at org.apache.kafka.common.security.authenticator.AbstractLogin.login(AbstractLogin.java:61)
-	at org.apache.kafka.common.security.kerberos.KerberosLogin.login(KerberosLogin.java:104)
-	at org.apache.kafka.common.security.authenticator.LoginManager.<init>(LoginManager.java:64)
-	at org.apache.kafka.common.security.authenticator.LoginManager.acquireLoginManager(LoginManager.java:107)
-	at org.apache.kafka.common.network.SaslChannelBuilder.configure(SaslChannelBuilder.java:173)
+[iceberg-flink-runtime-2.0-1.10.0.jar:?]
+	at org.apache.iceberg.shaded.com.fasterxml.jackson.core.JsonFactory._createParser(JsonFactory.java:1874) ~[iceberg-flink-runtime-2.0-1.10.0.jar:?]
+	at org.apache.iceberg.shaded.com.fasterxml.jackson.core.JsonFactory.createParser(JsonFactory.java:1273) ~[iceberg-flink-runtime-2.0-1.10.0.jar:?]
+	at org.apache.iceberg.shaded.com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3924) ~[iceberg-flink-runtime-2.0-1.10.0.jar:?]
+	at org.apache.iceberg.TableMetadataParser.read(TableMetadataParser.java:309) ~[iceberg-flink-runtime-2.0-1.10.0.jar:?]
+	at org.apache.iceberg.TableMetadataParser.read(TableMetadataParser.java:294) ~[iceberg-flink-runtime-2.0-1.10.0.jar:?]
+	at org.apache.iceberg.BaseMetastoreTableOperations.lambda$refreshFromMetadataLocation$0(BaseMetastoreTableOperations.java:180) ~[iceberg-flink-runtime-2.0-1.10.0.jar:?]
+	at org.apache.iceberg.BaseMetastoreTableOperations.lambda$refreshFromMetadataLocation$1(BaseMetastoreTableOperations.java:199) ~[iceberg-flink-runtime-2.0-1.10.0.jar:?]
+	at org.apache.iceberg.util.Tasks$Builder.runTaskWithRetry(Tasks.java:413) ~[iceberg-flink-runtime-2.0-1.10.0.jar:?]
+	at org.apache.iceberg.util.Tasks$Builder.runSingleThreaded(Tasks.java:219) ~[iceberg-flink-runtime-2.0-1.10.0.jar:?]
+	at org.apache.iceberg.util.Tasks$Builder.run(Tasks.java:203) ~[iceberg-flink-runtime-2.0-1.10.0.jar:?]
+	at org.apache.iceberg.util.Tasks$Builder.run(Tasks.java:196) ~[iceberg-flink-runtime-2.0-1.10.0.jar:?]
+	at org.apache.iceberg.BaseMetastoreTableOperations.refreshFromMetadataLocation(BaseMetastoreTableOperations.java:199) ~[iceberg-flink-runtime-2.0-1.10.0.jar:?]
+	at org.apache.iceberg.BaseMetastoreTableOperations.refreshFromMetadataLocation(BaseMetastoreTableOperations.java:176) ~[iceberg-flink-runtime-2.0-1.10.0.jar:?]
+	at org.apache.iceberg.BaseMetastoreTableOperations.refreshFromMetadataLocation(BaseMetastoreTableOperations.java:171) ~[iceberg-flink-runtime-2.0-1.10.0.jar:?]
+	at org.apache.iceberg.hive.HiveTableOperations.doRefresh(HiveTableOperations.java:131) ~[iceberg-flink-runtime-2.0-1.10.0.jar:?]
+	at org.apache.iceberg.BaseMetastoreTableOperations.refresh(BaseMetastoreTableOperations.java:88) ~[iceberg-flink-runtime-2.0-1.10.0.jar:?]
+	at org.apache.iceberg.BaseMetastoreTableOperations.current(BaseMetastoreTableOperations.java:71) ~[iceberg-flink-runtime-2.0-1.10.0.jar:?]
+	at org.apache.iceberg.BaseMetastoreCatalog.loadTable(BaseMetastoreCatalog.java:49) ~[iceberg-flink-runtime-2.0-1.10.0.jar:?]
+	at org.apache.iceberg.flink.TableLoader$CatalogTableLoader.loadTable(TableLoader.java:133) ~[iceberg-flink-runtime-2.0-1.10.0.jar:?]
+	at org.apache.iceberg.flink.sink.IcebergFilesCommitter.initializeState(IcebergFilesCommitter.java:152) ~[iceberg-flink-runtime-2.0-1.10.0.jar:?]
+	at org.apache.flink.streaming.api.operators.StreamOperatorStateHandler.initializeOperatorState(StreamOperatorStateHandler.java:142) ~[flink-runtime-2.1.0.jar:2.1.0]
+	at org.apache.flink.streaming.api.operators.AbstractStreamOperator.initializeState(AbstractStreamOperator.java:304) ~[flink-runtime-2.1.0.jar:2.1.0]
+	at org.apache.flink.streaming.runtime.tasks.RegularOperatorChain.initializeStateAndOpenOperators(RegularOperatorChain.java:106) ~[flink-runtime-2.1.0.jar:2.1.0]
+	at org.apache.flink.streaming.runtime.tasks.StreamTask.restoreStateAndGates(StreamTask.java:858) ~[flink-runtime-2.1.0.jar:2.1.0]
+	at org.apache.flink.streaming.runtime.tasks.StreamTask.lambda$restoreInternal$5(StreamTask.java:812) ~[flink-runtime-2.1.0.jar:2.1.0]
+	at org.apache.flink.streaming.runtime.tasks.StreamTaskActionExecutor$1.call(StreamTaskActionExecutor.java:55) ~[flink-runtime-2.1.0.jar:2.1.0]
+	at org.apache.flink.streaming.runtime.tasks.StreamTask.restoreInternal(StreamTask.java:812) ~[flink-runtime-2.1.0.jar:2.1.0]
+	at org.apache.flink.streaming.runtime.tasks.StreamTask.restore(StreamTask.java:771) ~[flink-runtime-2.1.0.jar:2.1.0]
+	at org.apache.flink.runtime.taskmanager.Task.runWithSystemExitMonitoring(Task.java:963) [flink-runtime-2.1.0.jar:2.1.0]
+	at org.apache.flink.runtime.taskmanager.Task.restoreAndInvoke(Task.java:932) [flink-runtime-2.1.0.jar:2.1.0]
+	at org.apache.flink.runtime.taskmanager.Task.doRun(Task.java:756) [flink-runtime-2.1.0.jar:2.1.0]
+	at org.apache.flink.runtime.taskmanager.Task.run(Task.java:568) [flink-runtime-2.1.0.jar:2.1.0]
+	at java.lang.Thread.run(Unknown Source) [?:?]
+Caused by: software.amazon.awssdk.core.exception.SdkInterruptedException
+	at software.amazon.awssdk.core.internal.http.InterruptMonitor.checkInterrupted(InterruptMonitor.java:40) ~[iceberg-aws-bundle-1.10.0.jar:?]
+	at software.amazon.awssdk.core.internal.http.StreamManagingStage.execute(StreamManagingStage.java:52) ~[iceberg-aws-bundle-1.10.0.jar:?]
+	at software.amazon.awssdk.core.internal.http.StreamManagingStage.execute(StreamManagingStage.java:35) ~[iceberg-aws-bundle-1.10.0.jar:?]
+	at software.amazon.awssdk.core.internal.http.pipeline.stages.ApiCallTimeoutTrackingStage.executeWithTimer(ApiCallTimeoutTrackingStage.java:82) ~[iceberg-aws-bundle-1.10.0.jar:?]
+	at software.amazon.awssdk.core.internal.http.pipeline.stages.ApiCallTimeoutTrackingStage.execute(ApiCallTimeoutTrackingStage.java:62) ~[iceberg-aws-bundle-1.10.0.jar:?]
+	... 56 more
+2026-03-20 13:08:25,877 DEBUG software.amazon.awssdk.request                               [] - Received successful response: 206, Request ID: 1be117a4-f174-1fe3-80b2-5c257319a3f4, Extended Request ID: not available
+2026-03-20 13:08:25,877 DEBUG software.amazon.awssdk.http.auth.aws.internal.signer.DefaultV4RequestSigner [] - AWS4 Canonical Request: GET
+/datatransfer/core_flow_ing_raw/raw_bplineitemdiscext-08bcdf8665044b31881d4f6814dfc4c2/metadata/00000-a1619ce2-6c37-4d2e-9c70-86775145d6ad.metadata.json
+
+amz-sdk-invocation-id:e8214ebc-a53a-55f2-a3e2-c31f236b9867
+amz-sdk-request:attempt=1; max=6
+host:s3-endpoint.sss2-msk2.x5.ru
+range:bytes=0-
+x-amz-checksum-crc32:AAAAAA==
+x-amz-content-sha256:UNSIGNED-PAYLOAD
+x-amz-date:20260320T130825Z
+x-amz-te:append-md5
+
+amz-sdk-invocation-id;amz-sdk-request;host;range;x-amz-checksum-crc32;x-amz-content-sha256;x-amz-date;x-amz-te
+UNSIGNED-PAYLOAD
+2026-03-20 13:08:25,877 DEBUG software.amazon.awssdk.http.auth.aws.internal.signer.DefaultV4RequestSigner [] - AWS4 Canonical Request Hash: ca204646c999a1d0f99dd303da6fc839077e50cb92b9862444bd565c19640c38
+2026-03-20 13:08:25,877 DEBUG software.amazon.awssdk.http.auth.aws.internal.signer.DefaultV4RequestSigner [] - AWS4 String to sign: AWS4-HMAC-SHA256
+20260320T130825Z
+20260320/endpoint/s3/aws4_request
+ca204646c999a1d0f99dd303da6fc839077e50cb92b9862444bd565c19640c38
+2026-03-20 13:08:25,877 INFO  org.apache.flink.runtime.taskmanager.Task                    [] - sink-pst_bptransaction-IcebergFilesCommitter -> sink-pst_bptransaction-IcebergSink core_flow_ing_raw.core_flow_ing_raw.raw_bptransaction: Writer (1/1)#10 (09e8602e1d60789548691990c218cfd9_1b47879bc1b5cd63081e17c076597cd9_0_10) switched from CANCELING to CANCELED.
