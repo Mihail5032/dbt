@@ -4,4 +4,6 @@ SELECT * FROM system.metadata.catalog_properties WHERE catalog_name = 'lev_ice';
 SQL Error [65536]: Query failed (#20260320_085004_01223_njazu): ConnectorMetadata getTableHandle() is not implemented
 SQL Error [1]: Query failed (#20260320_085056_01245_njazu): line 1:16: mismatched input 'catalog'. Expecting: 'FUNCTION', 'MATERIALIZED', 'SCHEMA', 'TABLE', 'VIEW'
 
+DESCRIBE EXTENDED lev_ice.core_flow_ing_raw.raw_bptransaction
+
 
