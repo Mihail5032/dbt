@@ -1,83 +1,34 @@
-
-CREATE SCHEMA lev_ice.core_flow_ing_raw
-WITH (location = 's3a://datatransfer/core_flow_ing_raw');
-
--- 1. raw_bpfinacialmovement
-CREATE TABLE lev_ice.core_flow_ing_raw.raw_bpfinacialmovement
-WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
-AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bpfinacialmovement WHERE 1=0;
-
--- 2. raw_bpfinancialmovemen
-CREATE TABLE lev_ice.core_flow_ing_raw.raw_bpfinancialmovemen
-WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
-AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bpfinancialmovemen WHERE 1=0;
-
--- 3. raw_bplineitemdiscext
-CREATE TABLE lev_ice.core_flow_ing_raw.raw_bplineitemdiscext
-WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
-AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bplineitemdiscext WHERE 1=0;
-
--- 4. raw_bplineitemdiscount
-CREATE TABLE lev_ice.core_flow_ing_raw.raw_bplineitemdiscount
-WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
-AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bplineitemdiscount WHERE 1=0;
-
--- 5. raw_bplineitemextensio
-CREATE TABLE lev_ice.core_flow_ing_raw.raw_bplineitemextensio
-WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
-AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bplineitemextensio WHERE 1=0;
-
--- 6. raw_bplineitemtax
-CREATE TABLE lev_ice.core_flow_ing_raw.raw_bplineitemtax
-WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
-AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bplineitemtax WHERE 1=0;
-
--- 7. raw_bpretaillineitem
-CREATE TABLE lev_ice.core_flow_ing_raw.raw_bpretaillineitem
-WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
-AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bpretaillineitem WHERE 1=0;
-
--- 8. raw_bpretailtotals
-CREATE TABLE lev_ice.core_flow_ing_raw.raw_bpretailtotals
-WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
-AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bpretailtotals WHERE 1=0;
-
--- 9. raw_bpsourcedocumentli
-CREATE TABLE lev_ice.core_flow_ing_raw.raw_bpsourcedocumentli
-WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
-AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bpsourcedocumentli WHERE 1=0;
-
--- 10. raw_bptender
-CREATE TABLE lev_ice.core_flow_ing_raw.raw_bptender
-WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
-AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bptender WHERE 1=0;
-
--- 11. raw_bptenderextensions
-CREATE TABLE lev_ice.core_flow_ing_raw.raw_bptenderextensions
-WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
-AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bptenderextensions WHERE 1=0;
-
--- 12. raw_bptendertotals
-CREATE TABLE lev_ice.core_flow_ing_raw.raw_bptendertotals
-WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
-AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bptendertotals WHERE 1=0;
-
--- 13. raw_bptransactdiscext
-CREATE TABLE lev_ice.core_flow_ing_raw.raw_bptransactdiscext
-WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
-AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bptransactdiscext WHERE 1=0;
-
--- 14. raw_bptransactextensio
-CREATE TABLE lev_ice.core_flow_ing_raw.raw_bptransactextensio
-WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
-AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio WHERE 1=0;
-
--- 15. raw_bptransaction
-CREATE TABLE lev_ice.core_flow_ing_raw.raw_bptransaction
-WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
-AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bptransaction WHERE 1=0;
-
--- 16. raw_bptransactiondisco
-CREATE TABLE lev_ice.core_flow_ing_raw.raw_bptransactiondisco
-WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
-AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bptransactiondisco WHERE 1=0;
+org.apache.flink.runtime.rest.handler.RestHandlerException: Could not execute application.
+	at org.apache.flink.runtime.webmonitor.handlers.JarRunHandler.lambda$handleRequest$1(JarRunHandler.java:114)
+	at java.base/java.util.concurrent.CompletableFuture.uniHandle(Unknown Source)
+	at java.base/java.util.concurrent.CompletableFuture$UniHandle.tryFire(Unknown Source)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+Caused by: java.util.concurrent.CompletionException: org.apache.flink.util.FlinkRuntimeException: Could not execute application.
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(Unknown Source)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(Unknown Source)
+	... 2 more
+Caused by: org.apache.flink.util.FlinkRuntimeException: Could not execute application.
+	at org.apache.flink.client.deployment.application.DetachedApplicationRunner.tryExecuteJobs(DetachedApplicationRunner.java:88)
+	at org.apache.flink.client.deployment.application.DetachedApplicationRunner.run(DetachedApplicationRunner.java:70)
+	at org.apache.flink.runtime.webmonitor.handlers.JarRunHandler.lambda$handleRequest$0(JarRunHandler.java:108)
+	... 2 more
+Caused by: org.apache.flink.client.program.ProgramInvocationException: The main method caused an error: The value of property fs.s3a.path.style.access must not be null
+	at org.apache.flink.client.program.PackagedProgram.callMainMethod(PackagedProgram.java:360)
+	at org.apache.flink.client.program.PackagedProgram.invokeInteractiveModeForExecution(PackagedProgram.java:223)
+	at org.apache.flink.client.ClientUtils.executeProgram(ClientUtils.java:105)
+	at org.apache.flink.client.deployment.application.DetachedApplicationRunner.tryExecuteJobs(DetachedApplicationRunner.java:84)
+	... 4 more
+Caused by: java.lang.IllegalArgumentException: The value of property fs.s3a.path.style.access must not be null
+	at org.apache.hadoop.thirdparty.com.google.common.base.Preconditions.checkArgument(Preconditions.java:219)
+	at org.apache.hadoop.conf.Configuration.set(Configuration.java:1403)
+	at org.apache.hadoop.conf.Configuration.set(Configuration.java:1384)
+	at ru.x5.DataStreamJob.run(DataStreamJob.java:50)
+	at ru.x5.DataStreamJob.main(DataStreamJob.java:36)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.apache.flink.client.program.PackagedProgram.callMainMethod(PackagedProgram.java:343)
+	... 7 more
