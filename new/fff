@@ -1,1 +1,2 @@
 
+ALTER TABLE ice_baby.core_flow_ing_raw.raw_bptender RENAME COLUMN is_corr_receipt TO is_aligned_tran;
