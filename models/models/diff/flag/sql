@@ -1,5 +1,79 @@
-# Из папки flink-jobs
-git fetch origin dev
+-- 1. raw_bpfinacialmovement
+CREATE TABLE lev_ice.core_flow_ing_raw.raw_bpfinacialmovement
+WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
+AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bpfinacialmovement WHERE 1=0;
 
-# Взять только PropertiesHolder из dev
-git checkout origin/dev -- xml-parser-correction/src/main/java/ru/x5/config/PropertiesHolder.java
+-- 2. raw_bpfinancialmovemen
+CREATE TABLE lev_ice.core_flow_ing_raw.raw_bpfinancialmovemen
+WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
+AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bpfinancialmovemen WHERE 1=0;
+
+-- 3. raw_bplineitemdiscext
+CREATE TABLE lev_ice.core_flow_ing_raw.raw_bplineitemdiscext
+WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
+AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bplineitemdiscext WHERE 1=0;
+
+-- 4. raw_bplineitemdiscount
+CREATE TABLE lev_ice.core_flow_ing_raw.raw_bplineitemdiscount
+WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
+AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bplineitemdiscount WHERE 1=0;
+
+-- 5. raw_bplineitemextensio
+CREATE TABLE lev_ice.core_flow_ing_raw.raw_bplineitemextensio
+WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
+AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bplineitemextensio WHERE 1=0;
+
+-- 6. raw_bplineitemtax
+CREATE TABLE lev_ice.core_flow_ing_raw.raw_bplineitemtax
+WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
+AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bplineitemtax WHERE 1=0;
+
+-- 7. raw_bpretaillineitem
+CREATE TABLE lev_ice.core_flow_ing_raw.raw_bpretaillineitem
+WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
+AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bpretaillineitem WHERE 1=0;
+
+-- 8. raw_bpretailtotals
+CREATE TABLE lev_ice.core_flow_ing_raw.raw_bpretailtotals
+WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
+AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bpretailtotals WHERE 1=0;
+
+-- 9. raw_bpsourcedocumentli
+CREATE TABLE lev_ice.core_flow_ing_raw.raw_bpsourcedocumentli
+WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
+AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bpsourcedocumentli WHERE 1=0;
+
+-- 10. raw_bptender
+CREATE TABLE lev_ice.core_flow_ing_raw.raw_bptender
+WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
+AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bptender WHERE 1=0;
+
+-- 11. raw_bptenderextensions
+CREATE TABLE lev_ice.core_flow_ing_raw.raw_bptenderextensions
+WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
+AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bptenderextensions WHERE 1=0;
+
+-- 12. raw_bptendertotals
+CREATE TABLE lev_ice.core_flow_ing_raw.raw_bptendertotals
+WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
+AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bptendertotals WHERE 1=0;
+
+-- 13. raw_bptransactdiscext
+CREATE TABLE lev_ice.core_flow_ing_raw.raw_bptransactdiscext
+WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
+AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bptransactdiscext WHERE 1=0;
+
+-- 14. raw_bptransactextensio
+CREATE TABLE lev_ice.core_flow_ing_raw.raw_bptransactextensio
+WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
+AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio WHERE 1=0;
+
+-- 15. raw_bptransaction
+CREATE TABLE lev_ice.core_flow_ing_raw.raw_bptransaction
+WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
+AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bptransaction WHERE 1=0;
+
+-- 16. raw_bptransactiondisco
+CREATE TABLE lev_ice.core_flow_ing_raw.raw_bptransactiondisco
+WITH (format = 'PARQUET', partitioning = ARRAY['load_date_xml'], sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml'])
+AS SELECT * FROM ice_baby.core_flow_ing_raw.raw_bptransactiondisco WHERE 1=0;
