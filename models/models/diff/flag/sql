@@ -7,5 +7,6 @@ SQL Error [1]: Query failed (#20260320_085056_01245_njazu): line 1:16: mismatche
 DESCRIBE EXTENDED lev_ice.core_flow_ing_raw.raw_bptransaction
 
 http://flink-minio.flink-operator.k8s.data-transfer-dev-1.salt.x5.ru/#/submit
+s3.endpoint=https://s3-endpoint.sss2-msk2.x5.ru
 
 
