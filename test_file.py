@@ -1,3 +1,11 @@
-print("Это ветка Михаила")
-запустить парсер на consumer Вовы  с однозначным определением эндпоинтов.
-  Сделать Consumer во flink с однозначным определением эндпоинтов
+# --- Ключи для PropertiesHolder ---
+s3.endpoint=https://s3-endpoint.sss2-msk2.x5.ru
+s3.path.style.access=true
+s3.access.key.id=
+s3.secret.access.key=
+connection.ssl.enabled=true
+s3.impl=org.apache.hadoop.fs.s3a.S3AFileSystem
+io.impl=org.apache.iceberg.aws.s3.S3FileIO
+s3.aws.credentials.provider=org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider
+client.region=endpoint
+impl.disable.cache=true
