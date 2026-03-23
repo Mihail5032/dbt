@@ -312,8 +312,17 @@ public class RawDataProcessFunction extends ProcessFunction<String, RowData> {
         // prepareThirdPart мутирует существующие тендеры (3108→3123) — эта логика
         // теперь в Tender.toRowDataPst(), поэтому фильтруем только синтетические тендеры
         // (те, у которых tenderTypeCode = "3101" — созданные prepareFirstPart/prepareSecondPart)
+        // Дедупликация: один синтетический тендер на транзакцию
+        Set<String> writtenSyntheticKeys = new HashSet<>();
         for (Tender tender : syntheticTenders) {
             if ("3101".equals(tender.getTenderTypeCode())) {
+                String synKey = tender.getRetailStoreId() + "|" + tender.getBusinessDayDate() + "|"
+                        + tender.getWorkstationId() + "|" + tender.getTransactionSequenceNumber()
+                        + "|" + tender.getTenderAmount();
+                if (writtenSyntheticKeys.contains(synKey)) {
+                    continue; // пропускаем дубль
+                }
+                writtenSyntheticKeys.add(synKey);
                 Schema rawSchema = getSchemaForSegment("E1BPTENDER");
                 if (rawSchema != null) {
                     RowData rawRowData = tender.toRowData(rawSchema, timestampDataXml, dateXml);
