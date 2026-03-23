@@ -1,13 +1,6 @@
-SELECT rtl_txn_rk, fieldname, fieldvalue
+SELECT rtl_txn_rk, COUNT(*) as cnt
 FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio
-WHERE rtl_txn_rk IN (
-    SELECT rtl_txn_rk 
-    FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio
-    WHERE fieldname = 'FN_ID' 
-    AND fieldvalue = '7384440900843597'
-    AND businessdaydate = date '2026-03-22'
-)
-AND fieldname IN ('FN_ID', 'DOCNUMBER', 'NSPK_BASID', 'FISCALSIGN', 'FR_DATETIM')
+WHERE fieldname = 'FN_ID' 
+AND fieldvalue = '7384440900843597'
 AND businessdaydate = date '2026-03-22'
-ORDER BY rtl_txn_rk, fieldname;
-
+GROUP BY rtl_txn_rk;
