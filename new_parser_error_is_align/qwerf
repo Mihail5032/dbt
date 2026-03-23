@@ -1,6 +1,11 @@
-SELECT transactionsequencenumber, load_ts_xml, load_ts
-FROM ice_baby.raw_table.raw_bptransaction
-WHERE transactionsequencenumber = '100000000005522501'
-AND retailstoreid = '9941'
-AND businessdaydate = date '2026-03-20'
-ORDER BY load_ts_xml;
+-- Найти rtl_txn_rk этой транзакции
+WITH ext AS (
+    SELECT rtl_txn_rk, load_ts_xml,
+        MAX(CASE WHEN fieldname = 'FN_ID' THEN fieldvalue END) AS fn,
+        MAX(CASE WHEN fieldname = 'DOCNUMBER' THEN fieldvalue END) AS fd
+    FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio
+    WHERE fieldname IN ('FN_ID', 'DOCNUMBER') 
+    AND businessdaydate = date '2026-03-22'
+    GROUP BY rtl_txn_rk, load_ts_xml
+)
+SELECT * FROM ext WHERE fn = '7384440900843597' AND fd = '13218';
