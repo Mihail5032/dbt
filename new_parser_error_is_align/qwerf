@@ -1,5 +1,5 @@
-SELECT transactiontypecode, transactionsequencenumber, retailstoreid, load_ts_xml, rtl_txn_rk
-FROM ice_baby.core_flow_ing_raw.raw_bptransaction
+SELECT transactiontypecode, load_ts_xml, tenderamount, tendertypecode, tendersequencenumber
+FROM ice_baby.core_flow_ing_raw.raw_bptender
 WHERE transactionsequencenumber = '100000000003489410'
 AND retailstoreid = '3934'
 AND businessdaydate = date '2026-03-15'
