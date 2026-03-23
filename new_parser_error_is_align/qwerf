@@ -1,20 +1,12 @@
-WITH ext AS (
-    SELECT rtl_txn_rk,
-        MAX(CASE WHEN fieldname = 'FN_ID' THEN fieldvalue END) AS fn,
-        MAX(CASE WHEN fieldname = 'DOCNUMBER' THEN fieldvalue END) AS fd,
-        COUNT(*) as cnt,
-        COUNT(DISTINCT load_ts_xml) as diff_load_ts
-    FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio
-    WHERE fieldname IN ('FN_ID', 'DOCNUMBER') 
-    AND businessdaydate = date '2026-03-22'
-    GROUP BY rtl_txn_rk
-)
-SELECT * FROM ext WHERE fn = '7384440900843597' AND fd = '13218';
-
-Если опять пусто — возможно FN_ID хранится с пробелами или другим форматом. Проверьте напрямую:
-
-SELECT DISTINCT fieldvalue 
-FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio
-WHERE fieldname = 'FN_ID' 
-AND fieldvalue LIKE '%7384440900843597%'
-AND businessdaydate = date '2026-03-22';
+-- Проверка дублей по всем таблицам для txn 100000000005522501 / магазин 9941
+SELECT 'raw_bptransaction' as tbl, COUNT(*) as cnt FROM ice_baby.core_flow_ing_raw.raw_bptransaction WHERE transactionsequencenumber = '100000000005522501' AND retailstoreid = '9941' AND businessdaydate = date '2026-03-20'
+UNION ALL
+SELECT 'raw_bptender', COUNT(*) FROM ice_baby.core_flow_ing_raw.raw_bptender WHERE transactionsequencenumber = '100000000005522501' AND retailstoreid = '9941' AND businessdaydate = date '2026-03-20'
+UNION ALL
+SELECT 'raw_bpretaillineitem', COUNT(*) FROM ice_baby.core_flow_ing_raw.raw_bpretaillineitem WHERE transactionsequencenumber = '100000000005522501' AND retailstoreid = '9941' AND businessdaydate = date '2026-03-20'
+UNION ALL
+SELECT 'raw_bptransactextensio', COUNT(*) FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio WHERE transactionsequencenumber = '100000000005522501' AND retailstoreid = '9941' AND businessdaydate = date '2026-03-20'
+UNION ALL
+SELECT 'raw_bptenderextensions', COUNT(*) FROM ice_baby.core_flow_ing_raw.raw_bptenderextensions WHERE transactionsequencenumber = '100000000005522501' AND retailstoreid = '9941' AND businessdaydate = date '2026-03-20'
+UNION ALL
+SELECT 'raw_bplineitemextensio', COUNT(*) FROM ice_baby.core_flow_ing_raw.raw_bplineitemextensio WHERE transactionsequencenumber = '100000000005522501' AND retailstoreid = '9941' AND businessdaydate = date '2026-03-20';
