@@ -1,18 +1,13 @@
--- Сколько транзакций с этим FN_ID за 22 марта
-SELECT rtl_txn_rk, retailstoreid, workstationid, COUNT(*) as cnt, 
-       COUNT(DISTINCT load_ts_xml) as diff_ts
+SELECT rtl_txn_rk, fieldname, fieldvalue
 FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio
-WHERE fieldname = 'FN_ID' 
-AND fieldvalue = '7384440900843597'
+WHERE rtl_txn_rk IN (
+    SELECT rtl_txn_rk 
+    FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio
+    WHERE fieldname = 'FN_ID' 
+    AND fieldvalue = '7384440900843597'
+    AND businessdaydate = date '2026-03-22'
+)
+AND fieldname IN ('FN_ID', 'DOCNUMBER', 'NSPK_BASID', 'FISCALSIGN', 'FR_DATETIM')
 AND businessdaydate = date '2026-03-22'
-GROUP BY rtl_txn_rk, retailstoreid, workstationid;
+ORDER BY rtl_txn_rk, fieldname;
 
-И то же для RAW:
-
-SELECT rtl_txn_rk, retailstoreid, workstationid, COUNT(*) as cnt,
-       COUNT(DISTINCT load_ts_xml) as diff_ts
-FROM ice_baby.raw_table.raw_bptransactextensio
-WHERE fieldname = 'FN_ID'
-AND fieldvalue = '7384440900843597'
-AND businessdaydate = date '2026-03-22'
-GROUP BY rtl_txn_rk, retailstoreid, workstationid;
