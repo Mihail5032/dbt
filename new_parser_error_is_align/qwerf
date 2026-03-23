@@ -42,3 +42,31 @@ join x x on x.rtl_txn_rk = z.rtl_txn_rk
 )
 select * FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio z
 join x x on x.rtl_txn_rk = z.rtl_txn_rk
+
+
+
+
+
+
+-------------
+WITH ext AS (
+    SELECT rtl_txn_rk, retailstoreid, workstationid,
+        MAX(CASE WHEN fieldname = 'NSPK_BASID' THEN fieldvalue END) AS basket_id,
+        MAX(CASE WHEN fieldname = 'FN_ID' THEN fieldvalue END) AS fn,
+        MAX(CASE WHEN fieldname = 'DOCNUMBER' THEN fieldvalue END) AS fd,
+        MAX(CASE WHEN fieldname = 'FISCALSIGN' THEN fieldvalue END) AS fp,
+        MAX(CASE WHEN fieldname = 'FR_DATETIM' THEN fieldvalue END) AS date_time,
+        MAX(load_ts) as load_ts,
+        MAX(load_date_xml) as load_date_xml,
+        MAX(load_ts_xml) as load_ts_xml
+    FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio
+    WHERE fieldname IN ('NSPK_BASID', 'FN_ID', 'DOCNUMBER', 'FISCALSIGN', 'FR_DATETIM') 
+    AND businessdaydate = date '2026-03-22'
+    GROUP BY rtl_txn_rk, retailstoreid, workstationid, businessdaydate
+),
+x AS (
+    SELECT * FROM ext WHERE fn = '7384440900843597' AND fd = '13218'
+)
+SELECT * FROM ice_baby.core_flow_ing_raw.raw_bpretaillineitem z
+JOIN x ON x.rtl_txn_rk = z.rtl_txn_rk;
+
