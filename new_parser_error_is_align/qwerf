@@ -1,9 +1,11 @@
--- Есть ли полные дубли в transactextensio?
-SELECT fieldgroup, fieldname, fieldvalue, load_ts_xml, COUNT(*)
-FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio
-WHERE workstationid = '2'
-  AND transactionsequencenumber = '100000000005327740'
-  AND retailstoreid = '4711'
-  AND businessdaydate = date '2026-03-22'
-GROUP BY fieldgroup, fieldname, fieldvalue, load_ts_xml
-HAVING COUNT(*) > 1;
+select * FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio
+where WORKSTATIONID = '2'
+AND transactionsequencenumber = '100000000005327740'
+AND RETAILSTOREID = '4711'
+and businessdaydate = date'2026-03-22'
+
+select * FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio
+where WORKSTATIONID = '3'
+AND transactionsequencenumber = '100000000004209416'
+AND RETAILSTOREID = '367I'
+and businessdaydate = date'2026-03-22'
