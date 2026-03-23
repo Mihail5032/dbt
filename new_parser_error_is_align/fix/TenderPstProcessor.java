@@ -49,7 +49,8 @@ public class TenderPstProcessor {
 
         List<Tender> tenders = prepareFirstPart(tx, sumSalesAmount, sumTenderAmount, isVprokExpress);
         tenders.addAll(prepareSecondPart(tx, sumSalesAmount, isVprokExpress));
-        tenders.addAll(prepareThirdPart(te, tex));
+        // prepareThirdPart убран: логика 3108→3123 теперь в Tender.toRowDataPst()
+        // prepareThirdPart возвращал ВСЕ оригинальные тендеры, что приводило к дублям
         return tenders;
     }
 
