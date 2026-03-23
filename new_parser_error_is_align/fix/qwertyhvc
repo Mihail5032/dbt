@@ -1,1 +1,11 @@
 
+-- Проверить: дубли только среди синтетических (3101) или среди обычных?
+SELECT tendertypecode, COUNT(*) as cnt
+FROM (
+    SELECT *, COUNT(*) OVER (PARTITION BY rtl_txn_rk, rtl_txn_tender_rk, tenderamount) as dup_cnt
+    FROM ice_baby.core_flow_ing_raw.raw_bptender
+    WHERE businessdaydate = date '2026-03-20'
+)
+WHERE dup_cnt > 1
+GROUP BY tendertypecode
+ORDER BY cnt DESC
