@@ -1,5 +1,5 @@
-SELECT transactionsequencenumber, retailstoreid, load_ts_xml, load_ts, rtl_txn_rk
-FROM ice_baby.core_flow_ing_raw.raw_bptransaction
+SELECT transactionsequencenumber, load_ts_xml, load_ts
+FROM ice_baby.raw_table.raw_bptransaction
 WHERE transactionsequencenumber = '100000000005522501'
 AND retailstoreid = '9941'
 AND businessdaydate = date '2026-03-20'
