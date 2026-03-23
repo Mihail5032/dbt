@@ -6,7 +6,7 @@ AND rtl_txn_rk IN (
     SELECT rtl_txn_rk 
     FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio
     WHERE fieldname = 'FN_ID' 
-    AND fieldvalue = '7384440900843597'
+    AND fieldvalue = '7384440800583359'
     AND businessdaydate = date '2026-03-22'
 )
 LIMIT 20;
