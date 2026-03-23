@@ -1,6 +1,12 @@
-SELECT rtl_txn_rk, COUNT(*) as cnt
+SELECT DISTINCT fieldvalue
 FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio
-WHERE fieldname = 'FN_ID' 
-AND fieldvalue = '7384440900843597'
+WHERE fieldname = 'DOCNUMBER'
 AND businessdaydate = date '2026-03-22'
-GROUP BY rtl_txn_rk;
+AND rtl_txn_rk IN (
+    SELECT rtl_txn_rk 
+    FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio
+    WHERE fieldname = 'FN_ID' 
+    AND fieldvalue = '7384440900843597'
+    AND businessdaydate = date '2026-03-22'
+)
+LIMIT 20;
