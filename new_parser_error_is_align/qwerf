@@ -7,3 +7,23 @@ from (
             where businessdaydate = date '2026-03-20'
 )
 where cnt > 1
+
+
+-- Общее количество дублей в raw_bptransaction за 20 марта
+SELECT COUNT(*) as total_dupes
+FROM (
+    SELECT *, COUNT(*) OVER (PARTITION BY rtl_txn_rk, transactionsequencenumber, retailstoreid) as cnt
+    FROM ice_baby.core_flow_ing_raw.raw_bptransaction
+    WHERE businessdaydate = date '2026-03-20'
+)
+WHERE cnt > 1;
+
+-- Проверка конкретных примеров Ярослава
+SELECT transactionsequencenumber, retailstoreid, COUNT(*) as cnt, 
+       COUNT(DISTINCT load_ts_xml) as diff_load_ts
+FROM ice_baby.core_flow_ing_raw.raw_bptransaction
+WHERE transactionsequencenumber = '100000000005522501'
+AND retailstoreid = '9941'
+AND businessdaydate = date '2026-03-20'
+GROUP BY transactionsequencenumber, retailstoreid;
+
