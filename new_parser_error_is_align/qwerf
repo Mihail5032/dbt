@@ -1,6 +1,18 @@
-SELECT transactiontypecode, transactionsequencenumber, load_ts_xml, retailstoreid
-FROM ice_baby.core_flow_ing_raw.raw_bptransaction
-WHERE transactionsequencenumber = '100000000005522501'
-AND retailstoreid = '9941'
-AND businessdaydate = date '2026-03-20'
-ORDER BY load_ts_xml;
+-- Сколько транзакций с этим FN_ID за 22 марта
+SELECT rtl_txn_rk, retailstoreid, workstationid, COUNT(*) as cnt, 
+       COUNT(DISTINCT load_ts_xml) as diff_ts
+FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio
+WHERE fieldname = 'FN_ID' 
+AND fieldvalue = '7384440900843597'
+AND businessdaydate = date '2026-03-22'
+GROUP BY rtl_txn_rk, retailstoreid, workstationid;
+
+И то же для RAW:
+
+SELECT rtl_txn_rk, retailstoreid, workstationid, COUNT(*) as cnt,
+       COUNT(DISTINCT load_ts_xml) as diff_ts
+FROM ice_baby.raw_table.raw_bptransactextensio
+WHERE fieldname = 'FN_ID'
+AND fieldvalue = '7384440900843597'
+AND businessdaydate = date '2026-03-22'
+GROUP BY rtl_txn_rk, retailstoreid, workstationid;
