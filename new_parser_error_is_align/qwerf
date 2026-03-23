@@ -1,6 +1,17 @@
-SELECT tendersequencenumber, tendertypecode, tenderamount, load_ts_xml, rtl_txn_tender_rk
-FROM ice_baby.core_flow_ing_raw.raw_bptender
-WHERE transactionsequencenumber = '100000000003489410'
-  AND retailstoreid = '3934'
-  AND businessdaydate = date '2026-03-15'
-ORDER BY load_ts_xml;
+-- Сколько записей и в каких батчах
+SELECT load_ts_xml, COUNT(*)
+FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio
+WHERE workstationid = '2'
+  AND transactionsequencenumber = '100000000005327740'
+  AND retailstoreid = '4711'
+  AND businessdaydate = date '2026-03-22'
+GROUP BY load_ts_xml;
+
+-- То же для retaillineitem
+SELECT load_ts_xml, COUNT(*)
+FROM ice_baby.core_flow_ing_raw.raw_bpretaillineitem
+WHERE workstationid = '3'
+  AND transactionsequencenumber = '100000000004209416'
+  AND retailstoreid = '367I'
+  AND businessdaydate = date '2026-03-22'
+GROUP BY load_ts_xml;
