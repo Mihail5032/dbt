@@ -1,0 +1,17 @@
+TRUNCATE TABLE ice_baby.core_flow_ing_raw.raw_bpfinacialmovement;
+TRUNCATE TABLE ice_baby.core_flow_ing_raw.raw_bpfinancialmovemen;
+TRUNCATE TABLE ice_baby.core_flow_ing_raw.raw_bplineitemdiscext;
+TRUNCATE TABLE ice_baby.core_flow_ing_raw.raw_bplineitemdiscount;
+TRUNCATE TABLE ice_baby.core_flow_ing_raw.raw_bplineitemextensio;
+TRUNCATE TABLE ice_baby.core_flow_ing_raw.raw_bplineitemtax;
+TRUNCATE TABLE ice_baby.core_flow_ing_raw.raw_bpretaillineitem;
+TRUNCATE TABLE ice_baby.core_flow_ing_raw.raw_bpretailtotals;
+TRUNCATE TABLE ice_baby.core_flow_ing_raw.raw_bpsourcedocumentli;
+TRUNCATE TABLE ice_baby.core_flow_ing_raw.raw_bptender;
+TRUNCATE TABLE ice_baby.core_flow_ing_raw.raw_bptenderextensions;
+TRUNCATE TABLE ice_baby.core_flow_ing_raw.raw_bptendertotals;
+TRUNCATE TABLE ice_baby.core_flow_ing_raw.raw_bptransactdiscext;
+TRUNCATE TABLE ice_baby.core_flow_ing_raw.raw_bptransactextensio;
+TRUNCATE TABLE ice_baby.core_flow_ing_raw.raw_bptransaction;
+TRUNCATE TABLE ice_baby.core_flow_ing_raw.raw_bptransaction_test;
+TRUNCATE TABLE ice_baby.core_flow_ing_raw.raw_bptransactiondisco;
