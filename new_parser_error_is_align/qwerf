@@ -1,6 +1,6 @@
-SELECT transactiontypecode, load_ts_xml, tenderamount, tendertypecode, tendersequencenumber
+SELECT load_ts_xml, COUNT(*) 
 FROM ice_baby.core_flow_ing_raw.raw_bptender
-WHERE transactionsequencenumber = '100000000003489410'
-AND retailstoreid = '3934'
-AND businessdaydate = date '2026-03-15'
-ORDER BY load_ts_xml;
+WHERE transactionsequencenumber = '100000000003489410' 
+  AND retailstoreid = '3934' 
+  AND businessdaydate = date '2026-03-15'
+GROUP BY load_ts_xml;
