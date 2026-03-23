@@ -1,12 +1,44 @@
-SELECT DISTINCT fieldvalue
-FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio
-WHERE fieldname = 'DOCNUMBER'
-AND businessdaydate = date '2026-03-22'
-AND rtl_txn_rk IN (
-    SELECT rtl_txn_rk 
-    FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio
-    WHERE fieldname = 'FN_ID' 
-    AND fieldvalue = '7384440800583359'
-    AND businessdaydate = date '2026-03-22'
+[23.03.2026 14:15] Anatoliy: with x as(
+  with ext as 
+  (select
+      rtl_txn_rk,
+      retailstoreid,
+      workstationid,
+      MAX(CASE WHEN fieldname = 'NSPK_BASID'  THEN fieldvalue END) AS basket_id,
+    MAX(CASE WHEN fieldname = 'FN_ID'       THEN fieldvalue END) AS fn,
+    MAX(CASE WHEN fieldname = 'DOCNUMBER'   THEN fieldvalue END) AS fd,
+    MAX(CASE WHEN fieldname = 'FISCALSIGN'  THEN fieldvalue END) AS fp,
+    MAX(CASE WHEN fieldname = 'FR_DATETIM'  THEN fieldvalue END) AS date_time,
+      MAX(load_ts) as load_ts,
+      MAX(load_date_xml) as load_date_xml,
+      MAX(load_ts_xml) as load_ts_xml
+  FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio
+  WHERE fieldname IN ('NSPK_BASID', 'FN_ID', 'DOCNUMBER', 'FISCALSIGN', 'FR_DATETIM') and businessdaydate = date'2026-03-22'
+  GROUP BY rtl_txn_rk, retailstoreid, workstationid, businessdaydate
+  )
+  select * from ext where fn = '7384440900843597' and fd = '13218'
 )
-LIMIT 20;
+select * FROM ice_baby.core_flow_ing_raw.raw_bpretaillineitem z
+join x x on x.rtl_txn_rk = z.rtl_txn_rk
+[23.03.2026 14:15] Anatoliy: with x as(
+  with ext as 
+  (select
+      rtl_txn_rk,
+      retailstoreid,
+      workstationid,
+      MAX(CASE WHEN fieldname = 'NSPK_BASID'  THEN fieldvalue END) AS basket_id,
+  MAX(CASE WHEN fieldname = 'FN_ID'       THEN fieldvalue END) AS fn,
+  MAX(CASE WHEN fieldname = 'DOCNUMBER'   THEN fieldvalue END) AS fd,
+  MAX(CASE WHEN fieldname = 'FISCALSIGN'  THEN fieldvalue END) AS fp,
+  MAX(CASE WHEN fieldname = 'FR_DATETIM'  THEN fieldvalue END) AS date_time,
+      MAX(load_ts) as load_ts,
+      MAX(load_date_xml) as load_date_xml,
+      MAX(load_ts_xml) as load_ts_xml
+  FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio
+  WHERE fieldname IN ('NSPK_BASID', 'FN_ID', 'DOCNUMBER', 'FISCALSIGN', 'FR_DATETIM') and businessdaydate = date'2026-03-22'
+  GROUP BY rtl_txn_rk, retailstoreid, workstationid, businessdaydate
+  )
+  select * from ext where fn = '7384440800583359' and fd = '13218'
+)
+select * FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio z
+join x x on x.rtl_txn_rk = z.rtl_txn_rk
