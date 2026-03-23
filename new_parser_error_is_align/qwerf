@@ -1,11 +1,20 @@
--- Найти rtl_txn_rk этой транзакции
 WITH ext AS (
-    SELECT rtl_txn_rk, load_ts_xml,
+    SELECT rtl_txn_rk,
         MAX(CASE WHEN fieldname = 'FN_ID' THEN fieldvalue END) AS fn,
-        MAX(CASE WHEN fieldname = 'DOCNUMBER' THEN fieldvalue END) AS fd
+        MAX(CASE WHEN fieldname = 'DOCNUMBER' THEN fieldvalue END) AS fd,
+        COUNT(*) as cnt,
+        COUNT(DISTINCT load_ts_xml) as diff_load_ts
     FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio
     WHERE fieldname IN ('FN_ID', 'DOCNUMBER') 
     AND businessdaydate = date '2026-03-22'
-    GROUP BY rtl_txn_rk, load_ts_xml
+    GROUP BY rtl_txn_rk
 )
 SELECT * FROM ext WHERE fn = '7384440900843597' AND fd = '13218';
+
+Если опять пусто — возможно FN_ID хранится с пробелами или другим форматом. Проверьте напрямую:
+
+SELECT DISTINCT fieldvalue 
+FROM ice_baby.core_flow_ing_raw.raw_bptransactextensio
+WHERE fieldname = 'FN_ID' 
+AND fieldvalue LIKE '%7384440900843597%'
+AND businessdaydate = date '2026-03-22';
