@@ -1,2 +1,20 @@
+# 1. Перейди в папку того проекта
+cd путь/к/другому/проекту
 
-Привет, там какая-то залупа: https://scm.x5.ru/sap-car-transfer/flink-jobs/-/tree/dev/wpufib-output-adapter?ref_type=heads - submodule - у аирфлоу гит синка не получается его подтянуть
+# 2. Переключись на dev
+git checkout dev
+
+# 3. Подтяни последние изменения
+git pull
+
+# 4. Забери только папку wpufib-output-adapter из feature-ветки
+git checkout feature/RAZRABOTKA-136 -- wpufib-output-adapter
+
+# 5. Проверь что подтянулось
+git status
+
+# 6. Закоммить
+git commit -m "Добавить wpufib-output-adapter из feature/RAZRABOTKA-136"
+
+# 7. Запушь
+git push
