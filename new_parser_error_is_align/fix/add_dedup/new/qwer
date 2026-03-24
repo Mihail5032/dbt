@@ -1,8 +1,3 @@
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  12.047 s
-[INFO] Finished at: 2026-03-24T18:25:18+03:00
-[INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project
  xml-parser-correction: Compilation failure
 [ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/process/DeduplicationFilter.java:[6,40] cannot find symbol
