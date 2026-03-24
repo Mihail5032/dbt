@@ -10,4 +10,8 @@ git add wpufib-output-adapter/src/
 # 4. Закоммить и запушь
 git commit -m "Fix: добавить wpufib-output-adapter/src как обычную папку"
 git push
+Remove-Item -Recurse -Force wpufib-output-adapter/src/.git
+
+Remove-Item -Recurse -Force wpufib-output-adapter/src/.git
+
 
