@@ -16,7 +16,6 @@ import org.apache.iceberg.flink.sink.FlinkSink;
 import ru.x5.config.PropertiesHolder;
 import ru.x5.factory.KafkaSourceFactory;
 import ru.x5.factory.StreamExecutionEnvironmentFactory;
-import ru.x5.process.DeduplicationFilter;
 import ru.x5.process.DeduplicationKeyExtractor;
 import ru.x5.process.RawDataProcessFunction;
 import ru.x5.process.StreamSideOutputTag;
@@ -129,16 +128,11 @@ public class DataStreamJob {
             pstSchemas.put(entry.getKey(), getIcebergSchema(loader));
         }
 
-        // Дедупликация: keyBy по ключу транзакции (4 поля) → фильтр с TTL 72 часа
-        // Гарантирует что дубли от SAP не попадут ни в одну таблицу
-        SingleOutputStreamOperator<String> deduplicated = stream
+        // Дедупликация + парсинг: keyBy по ключу транзакции (4 поля) → RawDataProcessFunction с TTL 72 часа
+        // XML парсится один раз, дубль проверяется в начале processElement
+        SingleOutputStreamOperator<RowData> rowData = stream
                 .uid(UID_SOURCE)
                 .keyBy(new DeduplicationKeyExtractor())
-                .process(new DeduplicationFilter())
-                .setParallelism(10)
-                .uid("deduplication-filter");
-
-        SingleOutputStreamOperator<RowData> rowData = deduplicated
                 .process(new RawDataProcessFunction(icebergSchemas, pstSchemas))
                 .setParallelism(10)
                 .uid(UID_PROCESS);
