@@ -1,1 +1,6 @@
 java.lang.OutOfMemoryError: Java heap space
+
+select * from ice_baby.core_flow_ing_raw.raw_bptransaction 
+where transactionsequencenumber = '100000000005522501'
+and retailstoreid = '9941'
+and businessdaydate = date '2026-03-20'
