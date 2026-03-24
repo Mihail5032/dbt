@@ -1,13 +1,18 @@
-# 1. Переключись на dev
-git checkout dev
-
-# 2. Подтяни последние изменения
-git pull
-
-# 3. Забери папку из feature-ветки
-git checkout feature/RAZRABOTKA-136 -- wpufib-output-adapter
-
-# 4. Закоммить и запушь
-git commit -m "Добавить wpufib-output-adapter из feature/RAZRABOTKA-136"
-git push
-
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  12.047 s
+[INFO] Finished at: 2026-03-24T18:25:18+03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project
+ xml-parser-correction: Compilation failure
+[ERROR] /C:/Users/Mikha.Shishkanov/flink-jobs/xml-parser-correction/src/main/java/ru/x5/process/DeduplicationFilter.java:[6,40] cannot find symbol
+[ERROR]   symbol:   class Time
+[ERROR]   location: package org.apache.flink.api.common.time
+[ERROR]
+[ERROR] -> [Help 1]
+[ERROR]
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR]
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
