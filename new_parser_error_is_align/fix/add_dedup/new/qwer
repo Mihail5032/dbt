@@ -1,20 +1,13 @@
-# 1. Перейди в папку того проекта
-cd путь/к/другому/проекту
+# 1. Удали submodule-ссылку
+git rm --cached wpufib-output-adapter/src
 
-# 2. Переключись на dev
-git checkout dev
+# 2. Удали .git внутри src (из-за него git думал что это submodule)
+rm -rf wpufib-output-adapter/src/.git
 
-# 3. Подтяни последние изменения
-git pull
+# 3. Добавь src как обычную папку
+git add wpufib-output-adapter/src/
 
-# 4. Забери только папку wpufib-output-adapter из feature-ветки
-git checkout feature/RAZRABOTKA-136 -- wpufib-output-adapter
-
-# 5. Проверь что подтянулось
-git status
-
-# 6. Закоммить
-git commit -m "Добавить wpufib-output-adapter из feature/RAZRABOTKA-136"
-
-# 7. Запушь
+# 4. Закоммить и запушь
+git commit -m "Fix: добавить wpufib-output-adapter/src как обычную папку"
 git push
+
