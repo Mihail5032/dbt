@@ -10,3 +10,4 @@ WITH cnt AS (
 )
 SELECT * FROM cnt
 WHERE qnty > 1
+Флаг is_aligned_tran должен проверять баланс по всем типам транзакций или только по 10%?
