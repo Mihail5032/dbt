@@ -1,6 +1,12 @@
-java.lang.OutOfMemoryError: Java heap space
-
-select * from ice_baby.core_flow_ing_raw.raw_bptransaction 
-where transactionsequencenumber = '100000000005522501'
-and retailstoreid = '9941'
-and businessdaydate = date '2026-03-20'
+WITH cnt AS (
+    SELECT 
+        retailstoreid, 
+        businessdaydate, 
+        workstationid, 
+        transactionsequencenumber, 
+        count(*) AS qnty
+    FROM ice_baby.core_flow_ing_raw.raw_bptransaction_test
+    GROUP BY retailstoreid, businessdaydate, workstationid, transactionsequencenumber
+)
+SELECT * FROM cnt
+WHERE qnty > 1
