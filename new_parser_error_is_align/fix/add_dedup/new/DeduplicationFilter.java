@@ -3,8 +3,9 @@ package ru.x5.process;
 import org.apache.flink.api.common.state.StateTtlConfig;
 import org.apache.flink.api.common.state.ValueState;
 import org.apache.flink.api.common.state.ValueStateDescriptor;
-import org.apache.flink.api.common.time.Time;
 import org.apache.flink.configuration.Configuration;
+
+import java.time.Duration;
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
 import org.apache.flink.util.Collector;
 import org.apache.log4j.Logger;
@@ -34,7 +35,7 @@ public class DeduplicationFilter extends KeyedProcessFunction<String, String, St
     @Override
     public void open(Configuration parameters) {
         StateTtlConfig ttlConfig = StateTtlConfig
-                .newBuilder(Time.hours(TTL_HOURS))
+                .newBuilder(Duration.ofHours(TTL_HOURS))
                 .setUpdateType(StateTtlConfig.UpdateType.OnCreateAndWrite)
                 .setStateVisibility(StateTtlConfig.StateVisibility.NeverReturnExpired)
                 .cleanupFullSnapshot()
