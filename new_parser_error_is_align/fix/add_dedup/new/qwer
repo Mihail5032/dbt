@@ -9,3 +9,5 @@ LEFT JOIN ice_baby.core_flow_ing_raw.raw_bptransaction_test n
 WHERE n.retailstoreid IS NULL
     AND DATE(o.businessdaydate) = DATE '2026-03-24'
 GROUP BY o.retailstoreid, o.businessdaydate, o.transactiontypecode, o.workstationid, o.transactionsequencenumber
+
+дедупликация готова, дедуплицированные данные лежат в ice_baby.core_flow_ing_raw.raw_bptransaction_test
