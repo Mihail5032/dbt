@@ -1,24 +1,5 @@
-SHOW CREATE TABLE ice_baby.core_flow_ing_raw.raw_bptransaction
-
-Шаг 2: Скопируй результат, замени каталог и схему:
-
-CREATE TABLE core_flow_ice.core_low_ing_raw.raw_bptransaction (
-    -- сюда колонки из SHOW CREATE TABLE
-)
-
-DROP TABLE core_flow_ice.core_flow_ing_raw.raw_bpfinacialmovement;
-DROP TABLE core_flow_ice.core_flow_ing_raw.raw_bpfinancialmovemen;
-DROP TABLE core_flow_ice.core_flow_ing_raw.raw_bplineitemdiscext;
-DROP TABLE core_flow_ice.core_flow_ing_raw.raw_bplineitemdiscount;
-DROP TABLE core_flow_ice.core_flow_ing_raw.raw_bplineitemextensio;
-DROP TABLE core_flow_ice.core_flow_ing_raw.raw_bplineitemtax;
-DROP TABLE core_flow_ice.core_flow_ing_raw.raw_bpretaillineitem;
-DROP TABLE core_flow_ice.core_flow_ing_raw.raw_bpretailtotals;
-DROP TABLE core_flow_ice.core_flow_ing_raw.raw_bpsourcedocumentli;
-DROP TABLE core_flow_ice.core_flow_ing_raw.raw_bptender;
-DROP TABLE core_flow_ice.core_flow_ing_raw.raw_bptenderextensions;
-DROP TABLE core_flow_ice.core_flow_ing_raw.raw_bptendertotals;
-DROP TABLE core_flow_ice.core_flow_ing_raw.raw_bptransactdiscext;
-DROP TABLE core_flow_ice.core_flow_ing_raw.raw_bptransactextensio;
-DROP TABLE core_flow_ice.core_flow_ing_raw.raw_bptransaction;
-DROP TABLE core_flow_ice.core_flow_ing_raw.raw_bptransactiondisco;
+WITH (
+    format = 'PARQUET',
+    partitioning = ARRAY['load_date_xml'],
+    sorted_by = ARRAY['rtl_txn_rk', 'load_ts_xml']
+);
