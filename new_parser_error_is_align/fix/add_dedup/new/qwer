@@ -9,3 +9,10 @@ WHERE datetime LIKE '%Mar 24%'
 AND (result LIKE '%<RETAILSTOREID>3CNV</RETAILSTOREID>%' 
      OR result LIKE '%<FLDVAL>3CNV%</FLDVAL>%')
 GROUP BY 1
+
+SELECT datetime, result
+FROM raw_table_audit
+WHERE datetime LIKE '%Mar 24%'
+AND result LIKE '%<RETAILSTOREID>3CNV</RETAILSTOREID>%'
+AND result LIKE '%конкретный_transactionsequencenumber%'
+LIMIT 1
