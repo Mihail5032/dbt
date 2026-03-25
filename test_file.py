@@ -1,1 +1,11 @@
-s3a://flink-operator-data/flink-checkpoints-dev/4e090dd098c291b9becbf533ebb7e4e6/chk-2855
+# 1. Создай новую ветку от текущей
+git checkout -b feature/deduplication
+
+# 2. Добавь файлы
+git add .
+
+# 3. Закоммить
+git commit -m "Добавить дедупликацию транзакций с TTL 72 часа"
+
+# 4. Запушь
+git push -u origin feature/deduplication
