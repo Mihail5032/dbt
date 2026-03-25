@@ -1,18 +1,6 @@
-SELECT 
-    CASE 
-        WHEN result LIKE '%<RETAILSTOREID>3CNV</RETAILSTOREID>%' THEN 'normal'
-        ELSE 'fldname'
-    END as format,
-    count(*) as cnt
-FROM raw_table_audit
-WHERE datetime LIKE '%Mar 24%'
-AND (result LIKE '%<RETAILSTOREID>3CNV</RETAILSTOREID>%' 
-     OR result LIKE '%<FLDVAL>3CNV%</FLDVAL>%')
-GROUP BY 1
-
 SELECT datetime, result
 FROM raw_table_audit
 WHERE datetime LIKE '%Mar 24%'
 AND result LIKE '%<RETAILSTOREID>3CNV</RETAILSTOREID>%'
-AND result LIKE '%конкретный_transactionsequencenumber%'
+AND result LIKE '%<TRANSACTIONSEQUENCENUMBER>конкретный_номер</TRANSACTIONSEQUENCENUMBER>%'
 LIMIT 1
