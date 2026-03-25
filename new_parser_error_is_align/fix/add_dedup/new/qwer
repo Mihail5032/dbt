@@ -1,11 +1,11 @@
-WITH CNT AS (
-    SELECT retailstoreid, businessdaydate, transactiontypecode, workstationid, transactionsequencenumber, count(*) as qnty
-    FROM ice_baby.core_flow_ing_raw.raw_bptransaction
-    WHERE DATE(businessdaydate) = DATE '2026-03-24'
-    GROUP BY retailstoreid, businessdaydate, transactiontypecode, workstationid, transactionsequencenumber
-)
-SELECT qnty, count(*) as how_many
-FROM CNT
-WHERE qnty > 1
-GROUP BY qnty
-ORDER BY qnty
+SELECT o.retailstoreid, o.businessdaydate, o.transactiontypecode, o.workstationid, o.transactionsequencenumber, count(*) as cnt
+FROM ice_baby.core_flow_ing_raw.raw_bptransaction o
+LEFT JOIN ice_baby.core_flow_ing_raw.raw_bptransaction_test n
+    ON o.retailstoreid = n.retailstoreid
+    AND o.businessdaydate = n.businessdaydate
+    AND o.transactiontypecode = n.transactiontypecode
+    AND o.workstationid = n.workstationid
+    AND o.transactionsequencenumber = n.transactionsequencenumber
+WHERE n.retailstoreid IS NULL
+    AND DATE(o.businessdaydate) = DATE '2026-03-24'
+GROUP BY o.retailstoreid, o.businessdaydate, o.transactiontypecode, o.workstationid, o.transactionsequencenumber
