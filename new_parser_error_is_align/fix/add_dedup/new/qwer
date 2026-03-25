@@ -11,3 +11,7 @@ FROM ice_baby.core_flow_ing_raw.raw_bptransaction_test
 WHERE transactionsequencenumber = '100000000027918'
 AND retailstoreid = '3CNV'
 AND DATE(businessdaydate) = DATE '2026-03-24'
+
+
+kafka-kafka-bootstrap.kafka.svc.cluster.local:9092
+
