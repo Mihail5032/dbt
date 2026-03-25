@@ -4,3 +4,5 @@ WHERE datetime >= TIMESTAMP '2026-03-24 00:00:00'
 AND datetime < TIMESTAMP '2026-03-25 00:00:00'
 AND result LIKE '%3CNV%'
 LIMIT 10
+
+SQL Error [58]: Query failed (#20260325_100656_02305_64nui): line 3:16: Cannot apply operator: varchar <= timestamp(0)
