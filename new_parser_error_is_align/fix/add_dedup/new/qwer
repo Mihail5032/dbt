@@ -1,13 +1,7 @@
-WITH cnt AS (
-    SELECT 
-        retailstoreid, 
-        businessdaydate, 
-        workstationid, 
-        transactionsequencenumber, 
-        count(*) AS qnty
-    FROM ice_baby.core_flow_ing_raw.raw_bptransaction_test
-    GROUP BY retailstoreid, businessdaydate, workstationid, transactionsequencenumber
+WITH CNT AS (
+    SELECT retailstoreid, businessdaydate, transactiontypecode, workstationid, transactionsequencenumber, count(*) as qnty
+    FROM ice_baby.core_flow_ing_raw.raw_bptransaction
+    WHERE DATE(businessdaydate) = DATE '2026-03-24'
+    GROUP BY retailstoreid, businessdaydate, transactiontypecode, workstationid, transactionsequencenumber
 )
-SELECT * FROM cnt
-WHERE qnty > 1
-Флаг is_aligned_tran должен проверять баланс по всем типам транзакций или только по 10%?
+SELECT * FROM CNT WHERE qnty > 1
