@@ -1,7 +1,11 @@
 WITH CNT AS (
-select retailstoreid, businessdaydate, transactiontypecode, workstationid, transactionsequencenumber, count(*) as qnty
-from ice_baby.core_flow_ing_raw.raw_bptransaction_test
-where DATE(businessdaydate) = DATE '2026-03-24'
-group by retailstoreid, businessdaydate, transactiontypecode, workstationid, transactionsequencenumber 
+    SELECT businessdaydate, retailstoreid, transactiontypecode, workstationid, transactionsequencenumber, count(*) as qnty
+    FROM ice_baby.core_flow_ing_raw.raw_bptransaction_test
+    GROUP BY businessdaydate, retailstoreid, transactiontypecode, workstationid, transactionsequencenumber
 )
-select count(*) from CNT where qnty >1
+SELECT DATE(businessdaydate) as day, count(*) as duplicates
+FROM CNT 
+WHERE qnty > 1
+GROUP BY DATE(businessdaydate)
+ORDER BY day
+
