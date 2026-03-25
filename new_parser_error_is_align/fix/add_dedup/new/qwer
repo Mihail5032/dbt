@@ -1,2 +1,2 @@
-SQL Error [1]: Query failed (#20260325_092529_01631_64nui): line 1:13: mismatched input 'catalog'. Expecting: 'FUNCTION', 'MATERIALIZED', 'SCHEMA', 'TABLE', 'VIEW'
+SELECT * FROM system.metadata.catalog_properties WHERE catalog_name = 'ice_baby'
 
