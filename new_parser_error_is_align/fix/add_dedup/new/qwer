@@ -1,1 +1,5 @@
-Парсер с дедупликацией отсекает не только дубли, но и валидные транзакции магазина 3CNV
+SELECT datetime, result
+FROM raw_table_audit
+WHERE result LIKE '%<RETAILSTOREID>3CNV</RETAILSTOREID>%'
+AND result LIKE '%<TRANSACTIONSEQUENCENUMBER>1000000000027918</TRANSACTIONSEQUENCENUMBER>%'
+LIMIT 1
