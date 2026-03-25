@@ -1,15 +1,5 @@
-WITH CNT AS (
-    SELECT retailstoreid, businessdaydate, transactiontypecode, workstationid, transactionsequencenumber, count(*) as qnty
-    FROM ice_baby.core_flow_ing_raw.raw_bptransaction_test
-    WHERE DATE(businessdaydate) = DATE '2026-03-21'
-    GROUP BY retailstoreid, businessdaydate, transactiontypecode, workstationid, transactionsequencenumber
-)
-SELECT * FROM CNT WHERE qnty > 1 LIMIT 1
-
-Потом по найденной транзакции:
-
-SELECT retailstoreid, transactionsequencenumber, workstationid, transactiontypecode, load_ts_xml
-FROM ice_baby.core_flow_ing_raw.raw_bptransaction_test
-WHERE retailstoreid = 'подставь'
-AND transactionsequencenumber = 'подставь'
-AND DATE(businessdaydate) = DATE '2026-03-21'
+SELECT datetime, result
+FROM ice_baby.raw_table.raw_table_audit
+WHERE datetime LIKE '%Mar 24%'
+AND result LIKE '%<RETAILSTOREID>5149</RETAILSTOREID>%'
+LIMIT 1
