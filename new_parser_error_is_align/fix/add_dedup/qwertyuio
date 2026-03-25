@@ -8,4 +8,3 @@ FROM CNT
 WHERE qnty > 1
 GROUP BY DATE(businessdaydate)
 ORDER BY day
-
