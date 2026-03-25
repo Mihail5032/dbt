@@ -4,4 +4,8 @@ WITH CNT AS (
     WHERE DATE(businessdaydate) = DATE '2026-03-24'
     GROUP BY retailstoreid, businessdaydate, transactiontypecode, workstationid, transactionsequencenumber
 )
-SELECT * FROM CNT WHERE qnty > 1
+SELECT qnty, count(*) as how_many
+FROM CNT
+WHERE qnty > 1
+GROUP BY qnty
+ORDER BY qnty
